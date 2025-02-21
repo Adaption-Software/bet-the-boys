@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('team_name');
             $table->string('short_name')->nullable();
             $table->timestamps();
+            $table->date('deleted_at')->nullable();
         });
     }
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->tinyInteger('over_under')->nullable();
             $table->tinyInteger('outcome')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
