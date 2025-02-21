@@ -78,7 +78,7 @@ const submit = () => {
                 </label>
             </div>
 
-            <div class="mt-4 flex items-center justify-end">
+            <div class="mt-4 flex items-center justify-end gap-x-3">
                 <Link
                     v-if="canResetPassword"
                     :href="route('password.request')"
@@ -95,6 +95,8 @@ const submit = () => {
                     Log in
                 </PrimaryButton>
             </div>
+
+
         </form>
     </GuestLayout>
 </template>
