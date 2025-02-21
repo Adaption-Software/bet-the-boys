@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('leader_id')->constrained('users');
+            $table->dateTime('deleted_at')->nullable();
             $table->timestamps();
         });
     }
