@@ -44,4 +44,9 @@ class Bet extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function event(): BelongsTo
+    {
+        return $this->belongsTo(Event::class, 'event_id');
+    }
+
 }
