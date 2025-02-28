@@ -17,7 +17,7 @@ return new class extends Migration
                 $table->datetime('event_date');
                 $table->tinyInteger('outcome')->nullable();
                 $table->foreignId('winning_team_id')->nullable();
-                $table->boolean('canceled')->default(false);
+                $table->boolean('cancelled')->default(false)->nullable();
                 $table->timestamps();
             });
     }

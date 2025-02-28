@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Outcome;
 use Database\Factories\EventFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,7 +20,7 @@ class Event extends Model
 
     protected $casts = [
         'event_date' => 'datetime',
-        'outcome' => 'enum',
+        'outcome' => Outcome::class,
         'cancelled' => 'boolean',
     ];
 
