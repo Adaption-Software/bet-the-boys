@@ -4,9 +4,10 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite",
-        "lint": "eslint resources/**/*.js",
-        "lint:fix": "eslint resources/**/*.js --fix",
-        "format": "prettier --write resources/**/*.js"
+        "lint": "eslint resources/**/*.{js,vue}",
+        "lint:fix": "eslint resources/**/*.{js,vue} --fix",
+        "format": "prettier --write resources/**/*.{js,vue}",
+        "fix": "npm run lint:fix && npm run format"
     },
     "devDependencies": {
         "@eslint/js": "^9.21.0",

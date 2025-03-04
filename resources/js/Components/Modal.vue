@@ -36,7 +36,7 @@ watch(
                 showSlot.value = false;
             }, 200);
         }
-    },
+    }
 );
 
 const close = () => {
