@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\Outcome;
+use App\Enums\OverUnder;
 use Database\Factories\BetFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,8 +32,8 @@ class Bet extends Model
      */
     protected $casts = [
         'deleted_at' => 'datetime',
-        'over_under' => 'enum',
-        'outcome' => 'enum',
+        'over_under' => OverUnder::class,
+        'outcome' => Outcome::class,
     ];
 
     /*
