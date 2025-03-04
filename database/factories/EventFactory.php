@@ -30,7 +30,7 @@ class EventFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->title(),
+            'title' => $this->faker->words(3, true),
             'winning_team_id' => $this->faker->numberBetween(1, 100),
             'event_date' => $this->faker->date(),
             'outcome' => $this->faker->randomElement([Outcome::Win, Outcome::Lose, Outcome::Draw])->value,

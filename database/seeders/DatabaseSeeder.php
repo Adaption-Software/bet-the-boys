@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             EventSeeder::class,
+            TeamSeeder::class,
         ]);
 
         User::factory()->create([
