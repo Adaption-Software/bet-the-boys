@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-            Schema::create('events', function (Blueprint $table) {
-                $table->id();
-                $table->string('title');
-                $table->datetime('event_date');
-                $table->tinyInteger('outcome')->nullable();
-                $table->foreignId('winning_team_id')->nullable();
-                $table->boolean('cancelled')->default(false)->nullable();
-                $table->timestamps();
-            });
+        Schema::create('events', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->datetime('event_date');
+            $table->tinyInteger('outcome')->nullable();
+            $table->foreignId('winning_team_id')->nullable();
+            $table->boolean('cancelled')->default(false)->nullable();
+            $table->timestamps();
+        });
     }
 
     /**

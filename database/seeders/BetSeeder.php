@@ -10,7 +10,8 @@ use Illuminate\Support\Collection;
 class BetSeeder extends Seeder
 {
     protected Collection $users;
-    function __construct()
+
+    public function __construct()
     {
         $this->users = User::all();
     }

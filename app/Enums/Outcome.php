@@ -10,7 +10,7 @@ enum Outcome: int
 
     public function label(): string
     {
-        return match($this) {
+        return match ($this) {
             self::Win => 'win',
             self::Lose => 'lose',
             self::Draw => 'draw',

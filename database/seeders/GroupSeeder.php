@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use AllowDynamicProperties;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -11,7 +10,8 @@ use Illuminate\Database\Seeder;
 class GroupSeeder extends Seeder
 {
     protected Collection $users;
-    function __construct()
+
+    public function __construct()
     {
         $this->users = User::all();
     }
