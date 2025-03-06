@@ -24,7 +24,7 @@ class Event extends Model
         'cancelled' => 'boolean',
     ];
 
-    public function events(): HasMany
+    public function bets(): HasMany
     {
         return $this->hasMany(Bet::class, 'event_id');
     }

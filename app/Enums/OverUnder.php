@@ -2,10 +2,10 @@
 
 namespace App\Enums;
 
-enum OverUnder: int
+enum OverUnder: string
 {
-    case Over = 1;
-    case Under = 2;
+    case Over = 'over';
+    case Under = 'under';
 
     public function label(): string
     {

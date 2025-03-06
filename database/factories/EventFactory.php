@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Enums\Outcome;
 use App\Models\Event;
+use App\Models\Team;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -31,7 +32,7 @@ class EventFactory extends Factory
     {
         return [
             'title' => $this->faker->words(3, true),
-            'winning_team_id' => $this->faker->numberBetween(1, 100),
+            'winning_team_id' => Team::factory(),
             'event_date' => $this->faker->date(),
             'outcome' => $this->faker->randomElement([Outcome::Win, Outcome::Lose, Outcome::Draw])->value,
             'cancelled' => $this->faker->boolean(),

@@ -2,18 +2,18 @@
 
 namespace App\Enums;
 
-enum Outcome: int
+enum Outcome: string
 {
-    case Win = 1;
-    case Lose = 2;
-    case Draw = 3;
+    case Win = 'win';
+    case Lose = 'lose';
+    case Draw = 'draw';
 
     public function label(): string
     {
         return match ($this) {
-            self::Win => 'win',
-            self::Lose => 'lose',
-            self::Draw => 'draw',
+            self::Win => 'Win',
+            self::Lose => 'Lose',
+            self::Draw => 'Draw',
         };
     }
 }
