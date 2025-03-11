@@ -1,33 +1,32 @@
 <script setup>
 import { useAttrs } from 'vue';
 
-import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
-import InputError from "@/Components/InputError.vue";
+import InputLabel from '@/Components/InputLabel.vue';
+import TextInput from '@/Components/TextInput.vue';
+import InputError from '@/Components/InputError.vue';
 
 defineOptions({ inheritAttrs: false });
 
 defineProps({
     modelValue: {
         type: [String, Number],
-        required: true
+        required: true,
     },
     label: {
-      type: String,
-      required: true,
+        type: String,
+        required: true,
     },
     error: {
-        type: String
+        type: String,
     },
     id: {
         type: String,
-        required: true
-    }
-})
+        required: true,
+    },
+});
 
 const emit = defineEmits(['update:modelValue']);
 const attrs = useAttrs();
-
 </script>
 
 <template>
@@ -45,4 +44,3 @@ const attrs = useAttrs();
         <InputError v-if="error" class="mt-2" :message="error" />
     </div>
 </template>
-
