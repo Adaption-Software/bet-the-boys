@@ -1,20 +1,43 @@
 <script setup>
-import { ref } from 'vue';
+import {computed, ref} from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
+import {Link, usePage} from '@inertiajs/vue3';
 
 const showingNavigationDropdown = ref(false);
+const sidenav = computed(() => usePage().props.auth.sidenav);
+const showSidebar = ref(true);
 </script>
 
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100 dark:bg-primary-500">
+        <div class="flex min-h-screen bg-gray-100 dark:bg-primary-500">
+
+            <aside :class="showSidebar ? 'w-64' : 'w-16'" class="bg-white dark:bg-secondary-500 border-r transition-all duration-300">
+                <div class="flex items-center justify-between p-4">
+                    <ApplicationLogo class="h-8 w-8" />
+                    <button @click="showSidebar = !showSidebar" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+                <nav class="mt-4">
+                    <ul>
+                        <li v-for="link in sidenav" :key="link.route" class="p-2">
+                            <NavLink :href="route('dashboard')" :active="route().current('dashboard')" class="w-full p-2">
+                                {{ link.label }}
+                            </NavLink>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
             <nav
-                class="border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-secondary-500"
+                class="border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-secondary-500 relative"
             >
                 <!-- Primary Navigation Menu -->
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -31,7 +54,7 @@ const showingNavigationDropdown = ref(false);
 
                             <!-- Navigation Links -->
                             <div
-                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex sm:flex-col absolute left-0 top-48 dark:bg-secondary-500"
                             >
                                 <NavLink
                                     :href="route('dashboard')"
@@ -179,20 +202,22 @@ const showingNavigationDropdown = ref(false);
                 </div>
             </nav>
 
-            <!-- Page Heading -->
-            <header
-                class="bg-white shadow dark:bg-secondary-500"
-                v-if="$slots.header"
-            >
-                <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    <slot name="header" />
-                </div>
-            </header>
+            <div class="flex-1 flex flex-col">
+                <!-- Page Heading -->
+                <header
+                    class="bg-white shadow dark:bg-secondary-500"
+                    v-if="$slots.header"
+                >
+                    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                        <slot name="header" />
+                    </div>
+                </header>
 
-            <!-- Page Content -->
-            <main>
-                <slot />
-            </main>
+                <!-- Page Content -->
+                <main>
+                    <slot />
+                </main>
+            </div>
         </div>
     </div>
 </template>
