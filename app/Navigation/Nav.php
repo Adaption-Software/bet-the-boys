@@ -6,6 +6,7 @@ class Nav
 {
 
     protected string $route = '';
+    protected ?string $icon = null;
 
     final public function __construct(protected string $label) {}
 
@@ -21,6 +22,13 @@ class Nav
         return $this;
     }
 
+    public function icon($icon): static
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
     public function label(): string
     {
         return $this->label;
@@ -31,6 +39,7 @@ class Nav
         return [
             'label' => $this->label,
             'route' => $this->route,
+            'icon' => $this->icon,
         ];
     }
 }

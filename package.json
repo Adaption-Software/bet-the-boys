@@ -4,14 +4,20 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite",
-        "lint": "eslint resources/**/*.{js,vue}",
-        "lint:fix": "eslint resources/**/*.{js,vue} --fix",
-        "format": "prettier --write resources/**/*.{js,vue}",
+        "lint": "eslint resources",
+        "lint:fix": "eslint resources --fix",
+        "format": "npx prettier --write resources",
         "fix": "npm run lint:fix && npm run format"
     },
     "devDependencies": {
         "@eslint/js": "^9.21.0",
+        "@fortawesome/fontawesome-svg-core": "^6.7.2",
+        "@fortawesome/free-brands-svg-icons": "^6.7.2",
+        "@fortawesome/free-regular-svg-icons": "^6.7.2",
+        "@fortawesome/free-solid-svg-icons": "^6.7.2",
+        "@fortawesome/vue-fontawesome": "^3.0.8",
         "@inertiajs/vue3": "^2.0.0",
+        "@primeuix/themes": "^1.0.0",
         "@tailwindcss/forms": "^0.5.3",
         "@vitejs/plugin-vue": "^5.0.0",
         "autoprefixer": "^10.4.12",
@@ -25,6 +31,7 @@
         "laravel-vite-plugin": "^1.2.0",
         "postcss": "^8.4.31",
         "prettier": "^3.5.3",
+        "primevue": "^4.3.2",
         "tailwindcss": "^3.2.1",
         "vite": "^6.0.11",
         "vue": "^3.4.0"

@@ -39,9 +39,9 @@ const submit = () => {
         <Form @submit="submit">
             <TextField
                 id="email"
+                v-model="form.email"
                 label="Email"
                 type="email"
-                v-model="form.email"
                 required
                 autofocus
                 autocomplete="username"
@@ -50,9 +50,9 @@ const submit = () => {
 
             <TextField
                 id="password"
+                v-model="form.password"
                 label="Password"
                 type="password"
-                v-model="form.password"
                 required
                 autocomplete="current-password"
                 :error="form.errors.password"
@@ -60,7 +60,7 @@ const submit = () => {
 
             <div class="mt-4 block">
                 <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
+                    <Checkbox v-model:checked="form.remember" name="remember" />
                     <span class="ms-2 text-sm text-gray-600 dark:text-gray-400"
                         >Remember me</span
                     >
