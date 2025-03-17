@@ -4,8 +4,8 @@ namespace App\Navigation;
 
 class Nav
 {
-
     protected string $route = '';
+
     protected ?string $icon = null;
 
     final public function __construct(protected string $label) {}

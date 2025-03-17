@@ -14,7 +14,7 @@ abstract class Navigation
     public function buildNavigation($navigation): array
     {
         return collect($navigation)
-            ->map(fn($item) => $item->definition())
+            ->map(fn ($item) => $item->definition())
             ->toArray();
     }
 }
