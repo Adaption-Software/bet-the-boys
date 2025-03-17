@@ -8,7 +8,6 @@ class Sidenav extends Navigation
     {
         return [
             Nav::make('Home')
-//                ->route('dashboard')
                 ->icon('house'),
             Nav::make('NFL')
                 ->icon('football'),
