@@ -52,7 +52,7 @@ const visible = ref(true);
                     >
                         <div class="flex items-center space-x-3">
                             <button
-                                class="text-gray-100 h-fit"
+                                class="text-gray-100 h-fit mt-1.5"
                                 @click="visible = true"
                             >
                                 <FontAwesome class="text-2xl" icon="bars" />
