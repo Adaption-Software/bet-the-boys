@@ -17,7 +17,7 @@ const visible = ref(true);
                         class="flex flex-col gap-y-4 w-fit sm:w-80 h-full bg-secondary-500"
                     >
                         <div
-                            class="flex items-center justify-end pr-6 pt-4 shrink-0"
+                            class="flex items-center justify-end pr-6 pt-8 pb-2 shrink-0"
                         >
                             <button type="button" @click="closeCallback">
                                 <FontAwesome
