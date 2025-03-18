@@ -22,16 +22,11 @@ class Nav
         return $this;
     }
 
-    public function icon($icon): static
+    public function icon(string $icon): static
     {
         $this->icon = $icon;
 
         return $this;
-    }
-
-    public function label(): string
-    {
-        return $this->label;
     }
 
     public function definition(): array
