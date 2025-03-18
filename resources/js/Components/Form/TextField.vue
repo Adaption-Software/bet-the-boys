@@ -38,7 +38,7 @@ const attrs = useAttrs();
             v-bind="attrs"
             class="mt-1 block w-full"
             :model-value="modelValue"
-            @update:modelValue="emit('update:modelValue', $event)"
+            @update:model-value="emit('update:modelValue', $event)"
         />
 
         <InputError v-if="error" class="mt-2" :message="error" />
