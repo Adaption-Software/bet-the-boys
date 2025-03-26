@@ -91,6 +91,9 @@ const visible = ref(true);
                                     <DropdownLink :href="route('profile.edit')">
                                         Profile
                                     </DropdownLink>
+                                    <DropdownLink :href="route('admin')">
+                                        Filament Admin
+                                    </DropdownLink>
                                     <DropdownLink
                                         :href="route('logout')"
                                         method="post"
