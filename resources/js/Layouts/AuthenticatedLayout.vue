@@ -91,7 +91,13 @@ const visible = ref(true);
                                     <DropdownLink :href="route('profile.edit')">
                                         Profile
                                     </DropdownLink>
-                                    <DropdownLink :href="route('filament.admin.pages.dashboard')">
+                                    <DropdownLink
+                                        :href="
+                                            route(
+                                                'filament.admin.pages.dashboard'
+                                            )
+                                        "
+                                    >
                                         Filament Admin
                                     </DropdownLink>
                                     <DropdownLink

@@ -33,8 +33,10 @@ class Nav
     public function url(string $name): self
     {
         $this->url = $name;
+
         return $this;
     }
+
     public function icon(string $icon): static
     {
         $this->icon = $icon;
