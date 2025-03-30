@@ -1,23 +1,11 @@
 <script setup>
 const props = defineProps({
-    image: {
-        type: String,
-        required: true
-    },
-    teamName: {
-        type: String,
-        required: true,
-    },
-    eventDate: {
-        type: Object,
-        required: true,
-    },
-    location: {
-        type: String,
-        required: true
-    }
 
 })
+// v-4 for each bet to be places
+//header section with league and time
+//another div for team vs team
+//then buttons below for choosing winner
 </script>
 
 <template>

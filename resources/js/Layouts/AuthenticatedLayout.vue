@@ -33,8 +33,8 @@ const visible = ref(true);
                             <NavLink
                                 v-for="(nav, key) in $page.props.auth.sidenav"
                                 :key="key"
-                                :href="route('dashboard')"
-                                :active="route().current('profile')"
+                                :href="route(nav.route)"
+                                :active="route().current(nav.route)"
                                 :icon="nav.icon"
                             >
                                 {{ nav.label }}

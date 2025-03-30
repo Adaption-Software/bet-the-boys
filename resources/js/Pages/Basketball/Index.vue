@@ -1,16 +1,20 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import {Head} from "@inertiajs/vue3";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+
+
+//axios call for data from API controller
+//build card component
 
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Basketballs" />
 
     <AuthenticatedLayout>
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-200">
-                Dashboard
+               NBA
             </h2>
         </template>
 
@@ -19,9 +23,9 @@ import { Head } from '@inertiajs/vue3';
                 <div
                     class="overflow-hidden shadow-sm sm:rounded-lg bg-secondary-500"
                 >
-                    <div class="p-6 text-gray-100">You're logged in!</div>
                 </div>
             </div>
         </div>
     </AuthenticatedLayout>
 </template>
+

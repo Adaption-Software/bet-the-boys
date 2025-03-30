@@ -6,7 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class OddsApiController extends Controller
+class BasketballOddsController extends Controller
 {
     protected string $baseUrl = 'https://api.the-odds-api.com/v4/';
 
