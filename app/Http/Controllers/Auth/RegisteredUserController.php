@@ -20,7 +20,10 @@ class RegisteredUserController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('Auth/Register');
+        abort_if(! request()->has('email'), 403, 'Access denied.');
+
+        return Inertia::render('Auth/Register')
+            ->with('email', request()->query('email'));
     }
 
     /**
