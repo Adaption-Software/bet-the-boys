@@ -8,6 +8,11 @@ class Nav
 
     protected ?string $icon = null;
 
+    /**
+     * Navigation url.
+     */
+    protected ?string $url = null;
+
     final public function __construct(protected string $label) {}
 
     public static function make($label): static
@@ -18,6 +23,16 @@ class Nav
     public function route(string $route): static
     {
         $this->route = $route;
+
+        return $this;
+    }
+
+    /**
+     * Set the url for the navigation
+     */
+    public function url(string $name): self
+    {
+        $this->url = $name;
 
         return $this;
     }

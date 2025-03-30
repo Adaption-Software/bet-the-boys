@@ -92,6 +92,15 @@ const visible = ref(true);
                                         Profile
                                     </DropdownLink>
                                     <DropdownLink
+                                        :href="
+                                            route(
+                                                'filament.admin.pages.dashboard'
+                                            )
+                                        "
+                                    >
+                                        Filament Admin
+                                    </DropdownLink>
+                                    <DropdownLink
                                         :href="route('logout')"
                                         method="post"
                                         as="button"
