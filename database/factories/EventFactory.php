@@ -34,7 +34,7 @@ class EventFactory extends Factory
             'title' => $this->faker->words(3, true),
             'winning_team_id' => Team::factory(),
             'event_date' => $this->faker->date(),
-            'outcome' => $this->faker->randomElement([Outcome::Win, Outcome::Lose, Outcome::Draw])->value,
+            'outcome' => $this->faker->randomElement([Outcome::Win, Outcome::Lose, Outcome::Draw]),
             'cancelled' => $this->faker->boolean(),
         ];
     }

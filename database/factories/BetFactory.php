@@ -26,8 +26,8 @@ class BetFactory extends Factory
             'user_id' => User::factory(),
             'event_id' => Event::factory(),
             'winning_team_id' => Team::factory(),
-            'over_under' => $this->faker->randomElement([OverUnder::Over, OverUnder::Under])->value,
-            'outcome' => $this->faker->randomElement([Outcome::Win, Outcome::Lose, Outcome::Draw])->value,
+            'over_under' => $this->faker->randomElement([OverUnder::Over, OverUnder::Under]),
+            'outcome' => $this->faker->randomElement([Outcome::Win, Outcome::Lose, Outcome::Draw]),
         ];
     }
 }
