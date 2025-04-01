@@ -1,6 +1,7 @@
 <script setup>
 import {Head} from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import BetCard from "@/Components/BetCard.vue";
 
 
 //axios call for data from API controller
@@ -17,6 +18,32 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
                NBA
             </h2>
         </template>
+
+        <div class="flex flex-wrap gap-4">
+            <BetCard
+                icon="/assets/nhl-logo.svg"
+                title="NHL Premier League"
+                eventDate="3 Mar 2025"
+                eventTime="8:00 pm"
+                team1="TEAM 1"
+                odds1="+200"
+                team2="TEAM 2"
+                odds2="-200"
+                @chooseWinner="onChooseWinner"
+            />
+
+            <BetCard
+                icon="/assets/nba-logo.svg"
+                title="NBA Premier League"
+                eventDate="3 Mar 2025"
+                eventTime="8:00 pm"
+                team1="TEAM 3"
+                odds1="+150"
+                team2="TEAM 4"
+                odds2="-150"
+                @chooseWinner="onChooseWinner"
+            />
+        </div>
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
