@@ -49,9 +49,6 @@ import BetCard from "@/Components/BetCard.vue";
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div
-                    class="overflow-hidden shadow-sm sm:rounded-lg bg-secondary-500"
-                >
                     <div class="flex flex-wrap gap-4">
                         <BetCard
                             icon="/assets/nhl-logo.svg"
@@ -79,7 +76,6 @@ import BetCard from "@/Components/BetCard.vue";
                     </div>
                 </div>
             </div>
-        </div>
     </AuthenticatedLayout>
 </template>
 

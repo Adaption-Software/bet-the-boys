@@ -53,10 +53,13 @@ function confirmChoice() {
 </script>
 
 <template>
-    <div
-        class="w-full bg-[#101010] text-white p-4 rounded-md border-secondary-100 space-y-3"
-    >
-        <div class="grid grid-cols-2 divide-x items-start">
+    <!-- Outer card container with border and rounded corners -->
+    <div class="border border-gray-700 rounded-xl overflow-hidden w-full text-white">
+
+        <!-- Header (league info) -->
+        <div
+            class="flex justify-between items-center px-4 py-2 bg-[#101010] border-b border-gray-700"
+        >
             <div class="flex items-center gap-x-2">
                 <img
                     v-if="icon"
@@ -64,67 +67,70 @@ function confirmChoice() {
                     alt="League icon"
                     class="w-5 h-5 object-contain"
                 />
-                <span class="uppercase text-sm font-semibold">{{ title }}</span>
+                <span class="uppercase text-sm font-semibold">
+          {{ title }}
+        </span>
             </div>
 
-            <div class="text-right text-sm text-gray-400">
+            <div class="text-sm text-gray-400">
                 {{ eventDate }}, {{ eventTime }}
             </div>
         </div>
 
-        <div class="flex items-center justify-center space-x-4 mb-4">
-            <div
-                @click="selectTeam('team1')"
-                :class="[
-                    'flex flex-col items-center cursor-pointer p-2 rounded-md',
-                    selectedTeam === 'team1' ? 'border-2 border-blue-500' : '',
-                ]"
-            >
-                <span class="font-semibold text-base">{{ team1 }}</span>
-
-                <span
-                    class="font-medium"
-                    :class="
-                        parseFloat(odds1) >= 0
-                            ? 'text-green-500'
-                            : 'text-red-500'
-                    "
-                    >{{ odds1 }}</span
+        <!-- Main content area -->
+        <div class="bg-[#101010] p-4">
+            <!-- Teams & odds -->
+            <div class="flex items-center justify-center space-x-4 mb-4">
+                <!-- Team 1 -->
+                <div
+                    @click="selectTeam('team1')"
+                    :class="[
+            'flex flex-col items-center cursor-pointer p-2 rounded-md',
+            selectedTeam === 'team1' ? 'border-2 border-blue-500' : '',
+          ]"
                 >
+                    <span class="font-semibold text-base">{{ team1 }}</span>
+                    <span
+                        class="font-medium"
+                        :class="parseFloat(odds1) >= 0 ? 'text-green-500' : 'text-red-500'"
+                    >
+            {{ odds1 }}
+          </span>
+                </div>
+
+                <!-- VS -->
+                <span class="text-yellow-500 font-semibold border rounded-full p-2">
+          VS
+        </span>
+
+                <!-- Team 2 -->
+                <div
+                    @click="selectTeam('team2')"
+                    :class="[
+            'flex flex-col items-center cursor-pointer p-2 rounded-md',
+            selectedTeam === 'team2' ? 'border-2 border-blue-500' : '',
+          ]"
+                >
+                    <span class="font-semibold text-base">{{ team2 }}</span>
+                    <span
+                        class="font-medium"
+                        :class="parseFloat(odds2) >= 0 ? 'text-green-500' : 'text-red-500'"
+                    >
+            {{ odds2 }}
+          </span>
+                </div>
             </div>
 
-            <span class="text-yellow-500 font-semibold border rounded-full p-2">VS</span>
-
-            <!-- Team 2 -->
-            <div
-                @click="selectTeam('team2')"
-                :class="[
-                    'flex flex-col items-center cursor-pointer p-2 rounded-md',
-                    selectedTeam === 'team2' ? 'border-2 border-blue-500' : '',
-                ]"
+            <!-- Confirm selection button -->
+            <button
+                @click="confirmChoice"
+                :disabled="!selectedTeam"
+                class="bg-transparent border border-gray-600 hover:bg-gray-700
+               text-white text-sm font-semibold py-2 px-4 rounded-md w-full
+               disabled:opacity-50 disabled:cursor-not-allowed"
             >
-                <span class="font-semibold text-base">{{ team2 }}</span>
-
-                <span
-                    class="font-medium"
-                    :class="
-                        parseFloat(odds2) >= 0
-                            ? 'text-green-500'
-                            : 'text-red-500'
-                    "
-                >
-                    {{ odds2 }}
-                </span>
-            </div>
+                Confirm Choice
+            </button>
         </div>
-
-        <!-- Bottom section: Confirm selection button -->
-        <button
-            @click="confirmChoice"
-            :disabled="!selectedTeam"
-            class="bg-transparent border border-gray-600 hover:bg-gray-700 text-white text-sm font-semibold py-2 px-4 rounded-md w-full disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-            Confirm Choice
-        </button>
     </div>
 </template>
