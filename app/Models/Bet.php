@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\Outcome;
 use App\Enums\OverUnder;
+use App\Enums\OverUnderResult;
 use Database\Factories\BetFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,6 +24,10 @@ class Bet extends Model
         'user_id',
         'event_id',
         'winning_team_id',
+        'outcome',
+        'over_under_team_id',
+        'over_under',
+        'over_under_result'
     ];
 
     /**
@@ -34,6 +39,7 @@ class Bet extends Model
         'deleted_at' => 'datetime',
         'over_under' => OverUnder::class,
         'outcome' => Outcome::class,
+        'over_under_result' => OverUnderResult::class
     ];
 
     /*
