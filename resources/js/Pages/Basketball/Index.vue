@@ -15,7 +15,7 @@ import BetCard from "@/Components/BetCard.vue";
     <AuthenticatedLayout>
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-200">
-               NBA
+                NBA
             </h2>
         </template>
 
@@ -24,58 +24,28 @@ import BetCard from "@/Components/BetCard.vue";
                 <BetCard
                     icon="/assets/nhl-logo.svg"
                     title="NHL Premier League"
-                    eventDate="3 Mar 2025"
-                    eventTime="8:00 pm"
+                    event-date="3 Mar 2025"
+                    event-time="8:00 pm"
                     team1="TEAM 1"
                     odds1="+200"
                     team2="TEAM 2"
                     odds2="-200"
-                    @chooseWinner="onChooseWinner"
+                    @choose-winner="onChooseWinner"
                 />
 
                 <BetCard
                     icon="/assets/nba-logo.svg"
                     title="NBA Premier League"
-                    eventDate="3 Mar 2025"
-                    eventTime="8:00 pm"
+                    event-date="3 Mar 2025"
+                    event-time="8:00 pm"
                     team1="TEAM 3"
                     odds1="+150"
                     team2="TEAM 4"
                     odds2="-150"
-                    @chooseWinner="onChooseWinner"
+                    @choose-winner="onChooseWinner"
                 />
             </div>
         </div>
-
-        <div class="py-12">
-            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div class="flex flex-wrap gap-4">
-                        <BetCard
-                            icon="/assets/nhl-logo.svg"
-                            title="NHL Premier League"
-                            eventDate="3 Mar 2025"
-                            eventTime="8:00 pm"
-                            team1="TEAM 1"
-                            odds1="+200"
-                            team2="TEAM 2"
-                            odds2="-200"
-                            @chooseWinner="onChooseWinner"
-                        />
-
-                        <BetCard
-                            icon="/assets/nba-logo.svg"
-                            title="NBA Premier League"
-                            eventDate="3 Mar 2025"
-                            eventTime="8:00 pm"
-                            team1="TEAM 3"
-                            odds1="+150"
-                            team2="TEAM 4"
-                            odds2="-150"
-                            @chooseWinner="onChooseWinner"
-                        />
-                    </div>
-                </div>
-            </div>
     </AuthenticatedLayout>
 </template>
 

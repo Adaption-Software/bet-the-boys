@@ -55,7 +55,6 @@ function confirmChoice() {
 <template>
     <!-- Outer card container with border and rounded corners -->
     <div class="border border-gray-700 rounded-xl overflow-hidden w-full text-white">
-
         <!-- Header (league info) -->
         <div
             class="flex justify-between items-center px-4 py-2 bg-[#101010] border-b border-gray-700"
@@ -66,10 +65,10 @@ function confirmChoice() {
                     :src="icon"
                     alt="League icon"
                     class="w-5 h-5 object-contain"
-                />
+                >
                 <span class="uppercase text-sm font-semibold">
-          {{ title }}
-        </span>
+                    {{ title }}
+                </span>
             </div>
 
             <div class="text-sm text-gray-400">
@@ -83,51 +82,51 @@ function confirmChoice() {
             <div class="flex items-center justify-center space-x-4 mb-4">
                 <!-- Team 1 -->
                 <div
-                    @click="selectTeam('team1')"
                     :class="[
-            'flex flex-col items-center cursor-pointer p-2 rounded-md',
-            selectedTeam === 'team1' ? 'border-2 border-blue-500' : '',
-          ]"
+                        'flex flex-col items-center cursor-pointer p-2 rounded-md',
+                        selectedTeam === 'team1' ? 'border-2 border-blue-500' : '',
+                    ]"
+                    @click="selectTeam('team1')"
                 >
                     <span class="font-semibold text-base">{{ team1 }}</span>
                     <span
                         class="font-medium"
                         :class="parseFloat(odds1) >= 0 ? 'text-green-500' : 'text-red-500'"
                     >
-            {{ odds1 }}
-          </span>
+                        {{ odds1 }}
+                    </span>
                 </div>
 
                 <!-- VS -->
                 <span class="text-yellow-500 font-semibold border rounded-full p-2">
-          VS
-        </span>
+                    VS
+                </span>
 
                 <!-- Team 2 -->
                 <div
-                    @click="selectTeam('team2')"
                     :class="[
-            'flex flex-col items-center cursor-pointer p-2 rounded-md',
-            selectedTeam === 'team2' ? 'border-2 border-blue-500' : '',
-          ]"
+                        'flex flex-col items-center cursor-pointer p-2 rounded-md',
+                        selectedTeam === 'team2' ? 'border-2 border-blue-500' : '',
+                    ]"
+                    @click="selectTeam('team2')"
                 >
                     <span class="font-semibold text-base">{{ team2 }}</span>
                     <span
                         class="font-medium"
                         :class="parseFloat(odds2) >= 0 ? 'text-green-500' : 'text-red-500'"
                     >
-            {{ odds2 }}
-          </span>
+                        {{ odds2 }}
+                    </span>
                 </div>
             </div>
 
             <!-- Confirm selection button -->
             <button
-                @click="confirmChoice"
                 :disabled="!selectedTeam"
                 class="bg-transparent border border-gray-600 hover:bg-gray-700
                text-white text-sm font-semibold py-2 px-4 rounded-md w-full
                disabled:opacity-50 disabled:cursor-not-allowed"
+                @click="confirmChoice"
             >
                 Confirm Choice
             </button>

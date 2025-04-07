@@ -21,3 +21,4 @@ Route::middleware('auth')->group(function () {
 Route::get('basketball', [BasketballEventsController::class, 'index'])->name('basketball');
 
 require __DIR__.'/auth.php';
+require __DIR__.'/api.php';
