@@ -22,8 +22,8 @@ import BetCard from "@/Components/BetCard.vue";
         <div class="py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 gap-8 w-full">
                 <BetCard
-                    icon="/assets/nhl-logo.svg"
-                    title="NHL Premier League"
+                    icon="images/nba-logo.png"
+                    title="NFL Premier League"
                     event-date="3 Mar 2025"
                     event-time="8:00 pm"
                     team1="TEAM 1"
@@ -34,8 +34,8 @@ import BetCard from "@/Components/BetCard.vue";
                 />
 
                 <BetCard
-                    icon="/assets/nba-logo.svg"
-                    title="NBA Premier League"
+                    icon="images/nfl-logo.png"
+                    title="NFL Premier League"
                     event-date="3 Mar 2025"
                     event-time="8:00 pm"
                     team1="TEAM 3"

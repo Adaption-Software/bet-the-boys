@@ -63,8 +63,7 @@ function confirmChoice() {
                 <img
                     v-if="icon"
                     :src="icon"
-                    alt="League icon"
-                    class="w-5 h-5 object-contain"
+                    class="w-16 h-16 object-contain"
                 >
                 <span class="uppercase text-sm font-semibold">
                     {{ title }}
