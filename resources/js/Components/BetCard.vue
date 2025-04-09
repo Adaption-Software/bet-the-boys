@@ -6,7 +6,7 @@ const emits = defineEmits(['chooseWinner']);
 
 const selectedTeam = ref(null);
 
-const props = defineProps({
+defineProps({
     icon: {
         type: String,
         default: '',
@@ -57,7 +57,8 @@ function confirmChoice() {
     <div class="border border-gray-700 rounded-xl overflow-hidden w-full text-white">
         <!-- Header (league info) -->
         <div
-            class="flex justify-between items-center px-4 py-2 bg-[#101010] border-b border-gray-700"
+            class="flex flex-col gap-y-4 md:flex-row justify-between items-center px-2 md:px-4 py-2
+            bg-[#101010] border-b border-gray-700"
         >
             <div class="flex items-center gap-x-2">
                 <img
@@ -78,7 +79,7 @@ function confirmChoice() {
         <!-- Main content area -->
         <div class="bg-[#101010] p-4">
             <!-- Teams & odds -->
-            <div class="flex items-center justify-center space-x-4 mb-4">
+            <div class="flex flex-col items-center md:flex-row md:items-center md:justify-center gap-4 mb-4">
                 <!-- Team 1 -->
                 <div
                     :class="[
@@ -97,7 +98,7 @@ function confirmChoice() {
                 </div>
 
                 <!-- VS -->
-                <span class="text-yellow-500 font-semibold border rounded-full p-2">
+                <span class="text-yellow-500 font-semibold border rounded-full p-2 size-10">
                     VS
                 </span>
 

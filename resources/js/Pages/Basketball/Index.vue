@@ -20,7 +20,7 @@ import BetCard from "@/Components/BetCard.vue";
         </template>
 
         <div class="py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 gap-8 w-full">
+            <div class="grid md:grid-cols-2 gap-8 p-4 md:w-full">
                 <BetCard
                     icon="images/nba-logo.png"
                     title="NFL Premier League"
