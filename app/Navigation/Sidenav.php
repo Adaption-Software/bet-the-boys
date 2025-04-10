@@ -7,16 +7,17 @@ class Sidenav extends Navigation
     public function navigation(): array
     {
         return [
-            Nav::make('Home')
-                ->icon('house'),
-            Nav::make('NFL')
-                ->icon('football'),
-            Nav::make('MLB')
-                ->icon('baseball'),
+            //            Nav::make('Home')
+            //                ->icon('house'),
+            //            Nav::make('NFL')
+            //                ->icon('football'),
+            //            Nav::make('MLB')
+            //                ->icon('baseball'),
             Nav::make('NBA')
+                ->route('basketball')
                 ->icon('basketball'),
-            Nav::make('NHL')
-                ->icon('hockey-puck'),
+            //            Nav::make('NHL')
+            //                ->icon('hockey-puck'),
         ];
     }
 }

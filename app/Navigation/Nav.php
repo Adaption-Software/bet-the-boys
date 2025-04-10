@@ -47,6 +47,7 @@ class Nav
     public function definition(): array
     {
         return [
+            'url' => $this->url,
             'label' => $this->label,
             'route' => $this->route,
             'icon' => $this->icon,

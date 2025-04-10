@@ -15,7 +15,7 @@ class Group extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'name',
@@ -25,7 +25,7 @@ class Group extends Model
     /**
      * Get the attributes that should be cast.
      *
-     * @var list<string>
+     * @var array<string, string>
      */
     protected $casts = [
         'deleted_at' => 'datetime',

@@ -38,7 +38,7 @@ class User extends Authenticatable
     /**
      * Get the attributes that should be cast.
      *
-     * @var list<string>
+     * @var array<string, string>
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
