@@ -3,4 +3,6 @@
 use App\Http\Controllers\BasketballOddsController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('odds-api', BasketballOddsController::class)->name('odds-api');
+Route::name('api.')->group(function () {
+    Route::get('odds', BasketballOddsController::class)->name('odds');
+});
