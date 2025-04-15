@@ -23,7 +23,7 @@ class OddsConnector extends Connector
     protected function defaultQuery(): array
     {
         return [
-            'apiKey' =>  config('services.odds_api.key'),
+            'apiKey' => config('services.odds_api.key'),
             'regions' => 'us',
             'markets' => 'h2h,spreads,totals',
             'oddsFormat' => 'american',

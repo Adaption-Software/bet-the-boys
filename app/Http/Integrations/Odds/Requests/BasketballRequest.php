@@ -5,7 +5,7 @@ namespace App\Http\Integrations\Odds\Requests;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
-class BasketballRequest extends Request
+class BasketballRequest extends BaseOddsRequest
 {
     /**
      * The HTTP method of the request
