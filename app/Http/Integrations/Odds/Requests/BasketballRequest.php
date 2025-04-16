@@ -3,7 +3,6 @@
 namespace App\Http\Integrations\Odds\Requests;
 
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
 
 class BasketballRequest extends BaseOddsRequest
 {
@@ -17,6 +16,6 @@ class BasketballRequest extends BaseOddsRequest
      */
     public function resolveEndpoint(): string
     {
-        return '/sports/basketball_nba/odds';
+        return '/basketball_nba/odds';
     }
 }

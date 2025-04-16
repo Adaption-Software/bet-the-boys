@@ -14,7 +14,7 @@ class OddsConnector extends Connector
      */
     public function resolveBaseUrl(): string
     {
-        return 'https://api.the-odds-api.com/v4';
+        return 'https://api.the-odds-api.com/v4/sports';
     }
 
     /**
