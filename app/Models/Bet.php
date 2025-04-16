@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Enums\Outcome;
-use App\Enums\OverUnder;
-use App\Enums\OverUnderResult;
+use App\Enums\SpreadBet;
+use App\Enums\SpreadBetResult;
 use Database\Factories\BetFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,9 +25,9 @@ class Bet extends Model
         'event_id',
         'winning_team_id',
         'outcome',
-        'over_under_team_id',
-        'over_under',
-        'over_under_result'
+        'spread_bet_team_id',
+        'spread_bet',
+        'spread_bet_result',
     ];
 
     /**
@@ -37,9 +37,9 @@ class Bet extends Model
      */
     protected $casts = [
         'deleted_at' => 'datetime',
-        'over_under' => OverUnder::class,
+        'spread_bet' => SpreadBet::class,
         'outcome' => Outcome::class,
-        'over_under_result' => OverUnderResult::class
+        'spread_bet_result' => SpreadBetResult::class,
     ];
 
     /*

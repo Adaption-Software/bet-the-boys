@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Enums\Outcome;
-use App\Enums\OverUnder;
-use App\Enums\OverUnderResult;
+use App\Enums\SpreadBet;
+use App\Enums\SpreadBetResult;
 use App\Models\Bet;
 use App\Models\Event;
 use App\Models\Team;
@@ -28,9 +28,9 @@ class BetFactory extends Factory
             'event_id' => Event::factory(),
             'winning_team_id' => Team::factory(),
             'outcome' => $this->faker->randomElement([Outcome::Win, Outcome::Lose, Outcome::Draw]),
-            'over_under_team_id' => Team::factory(),
-            'over_under' => $this->faker->randomElement([OverUnder::Over, OverUnder::Under]),
-            'over_under_result' => $this->faker->randomElement([OverUnderResult::Hit, OverUnderResult::Miss])
+            'spread_bet_team_id' => Team::factory(),
+            'spread_bet' => $this->faker->randomElement([SpreadBet::Over, SpreadBet::Under]),
+            'spread_bet_result' => $this->faker->randomElement([SpreadBetResult::Hit, SpreadBetResult::Miss]),
         ];
     }
 }

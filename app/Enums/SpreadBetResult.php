@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum OverUnderResult: string
+enum SpreadBetResult: string
 {
     case Hit = 'hit';
     case Miss = 'miss';
