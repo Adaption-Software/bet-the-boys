@@ -16,8 +16,10 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('event_id')->constrained('events')->onDelete('cascade');
             $table->foreignId('winning_team_id')->nullable();
-            $table->string('over_under')->nullable();
             $table->string('outcome')->nullable();
+            $table->foreignId('spread_bet_team_id')->nullable();
+            $table->string('spread_bet')->nullable();
+            $table->string('spread_bet_result')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

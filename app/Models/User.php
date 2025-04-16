@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Group::class, 'leader_id');
     }
+
+    public function bets(): HasMany
+    {
+        return $this->hasMany(Bet::class);
+    }
 }

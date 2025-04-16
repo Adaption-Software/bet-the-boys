@@ -13,7 +13,7 @@ class BetSeeder extends Seeder
 
     public function __construct()
     {
-        $this->users = User::all();
+        $this->users = User::all()->take(3);
     }
 
     /**
@@ -21,8 +21,8 @@ class BetSeeder extends Seeder
      */
     public function run(): void
     {
-        Bet::factory(10)
-            ->recycle($this->users->random())
-            ->create();
+        $this->users->each(function ($user) {
+            Bet::factory(10)->recycle($user)->create();
+        });
     }
 }
