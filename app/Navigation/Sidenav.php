@@ -14,7 +14,7 @@ class Sidenav extends Navigation
             //            Nav::make('MLB')
             //                ->icon('baseball'),
             Nav::make('NBA')
-                ->route('basketball')
+                ->route('basketball.index')
                 ->icon('basketball'),
             //            Nav::make('NHL')
             //                ->icon('hockey-puck'),
