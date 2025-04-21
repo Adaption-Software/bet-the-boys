@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BasketballEventsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Redirect;
@@ -16,5 +17,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::middleware('auth')
+    ->prefix('sport')
+    ->group(function () {
+        Route::resource('basketball', BasketballEventsController::class)
+            ->only('index');
+    });
 
 require __DIR__.'/auth.php';
