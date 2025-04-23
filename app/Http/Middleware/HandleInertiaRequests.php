@@ -36,6 +36,9 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
                 'sidenav' => (new Sidenav)(),
             ],
+            'permissions' => [
+                'canManageUsers' => fn () => $request->user()->hasPermissionTo('manage users'),
+            ],
         ];
     }
 }
