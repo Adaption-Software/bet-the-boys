@@ -5,22 +5,24 @@ import StatCard from '@/Components/Stat/StatCard.vue';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 
-const props = defineProps({
+defineProps({
     bets: {
         type: Object,
+        default: null,
     },
     wins: {
         type: Number,
+        default: null,
     },
     losses: {
         type: Number,
+        default: null,
     },
     placed: {
         type: Number,
+        default: null,
     },
 });
-
-console.log(props.bets);
 </script>
 
 <template>

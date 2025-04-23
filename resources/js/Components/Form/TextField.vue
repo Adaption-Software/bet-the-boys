@@ -18,6 +18,7 @@ defineProps({
     },
     error: {
         type: String,
+        default: null,
     },
     id: {
         type: String,

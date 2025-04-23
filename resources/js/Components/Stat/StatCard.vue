@@ -10,6 +10,7 @@ defineProps({
     },
     trend: {
         type: [String, Number],
+        required: false,
     },
 });
 </script>
