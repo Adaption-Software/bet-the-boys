@@ -1,8 +1,12 @@
 <script setup>
-import { defineProps } from 'vue';
+import { computed, defineProps } from 'vue';
 import Versus from '@/Components/Bet/Versus.vue';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 
-defineProps({
+dayjs.extend(utc);
+
+const props = defineProps({
     icon: {
         type: String,
         default: '',
@@ -24,6 +28,14 @@ defineProps({
         default: null,
     },
 });
+
+const eventDate = computed(() => {
+    const date = dayjs(props.start_time);
+
+    return props.start_time && date.isValid()
+        ? date.utc().format('MMM DD, YYYY')
+        : null;
+});
 </script>
 
 <template>
@@ -34,14 +46,19 @@ defineProps({
             class="flex flex-row justify-between items-center px-4 py-2 bg-secondary-500 border-b border-gray-700"
         >
             <div class="flex items-center gap-x-2">
-                <img v-if="icon" :src="icon" class="w-16 h-16 object-contain" />
+                <img
+                    v-if="icon"
+                    :src="icon"
+                    :alt="`${sport_title} logo`"
+                    class="size-16 aspect-square object-contain"
+                />
                 <span class="uppercase text-sm font-semibold">
                     {{ sport_title }}
                 </span>
             </div>
 
             <div class="text-sm text-right text-gray-400">
-                {{ start_time }}
+                {{ eventDate }}
             </div>
         </div>
 

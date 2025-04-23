@@ -4,16 +4,12 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import BetCard from '@/Components/Bet/BetCard.vue';
 import { onMounted, ref } from 'vue';
 
-//axios call for data from API controller
-//build card component
-
 const bets = ref();
 
 onMounted(() => {
     axios
         .get(route('api.odds', { sport: 'basketball' }))
         .then(({ data }) => {
-            console.log(data);
             bets.value = data;
         })
         .catch((e) => {
@@ -37,9 +33,8 @@ onMounted(() => {
                 <BetCard
                     v-for="(bet, key) in bets"
                     :key="key"
-                    icon="images/nba-logo.png"
+                    icon="/images/nba-logo.png"
                     v-bind="bet"
-                    @choose-winner="onChooseWinner"
                 />
             </div>
         </div>
