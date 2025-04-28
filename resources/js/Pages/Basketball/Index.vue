@@ -1,12 +1,10 @@
 <script setup>
-import {Head} from "@inertiajs/vue3";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import BetCard from "@/Components/BetCard.vue";
-
+import { Head } from '@inertiajs/vue3';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import BetCard from '@/Components/BetCard.vue';
 
 //axios call for data from API controller
 //build card component
-
 </script>
 
 <template>
@@ -48,4 +46,3 @@ import BetCard from "@/Components/BetCard.vue";
         </div>
     </AuthenticatedLayout>
 </template>
-

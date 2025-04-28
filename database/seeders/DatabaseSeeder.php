@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             TeamSeeder::class,
             BetSeeder::class,
             GroupSeeder::class,
+            RoleSeeder::class,
         ]);
     }
 }
