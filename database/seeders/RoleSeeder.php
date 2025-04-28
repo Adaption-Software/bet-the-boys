@@ -19,6 +19,11 @@ class RoleSeeder extends Seeder
 
         $adminRole->givePermissionTo($adminPermission);
 
+        $groupLeader = Role::create(['name' => 'group leader']);
+        $groupLeaderPermission = Permission::create(['name' => 'manage groups']);
+
+        $groupLeader->givePermissionTo($groupLeaderPermission);
+
         $user = User::where('email', 'admin@example.com')->first();
 
         $user->assignRole($adminRole);
