@@ -3,6 +3,7 @@ import { computed, defineProps } from 'vue';
 import Versus from '@/Components/Bet/Versus.vue';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+import { useBets } from '@/scripts/stores/bets.js';
 
 dayjs.extend(utc);
 
@@ -27,7 +28,12 @@ const props = defineProps({
         type: Object,
         default: null,
     },
+    event: {
+        type: String,
+    },
 });
+
+const store = useBets();
 
 const eventDate = computed(() => {
     const date = dayjs(props.start_time);
@@ -67,6 +73,7 @@ const eventDate = computed(() => {
 
             <button
                 class="bg-transparent border border-gray-600 hover:bg-gray-700 text-white text-sm font-semibold py-2 px-4 rounded-md w-full disabled:opacity-50 disabled:cursor-not-allowed"
+                @click="store.placeBet(event)"
             >
                 Confirm Choice
             </button>

@@ -9,6 +9,7 @@ use Database\Factories\BetFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 
 class Bet extends Model
 {
@@ -55,5 +56,12 @@ class Bet extends Model
     public function event(): BelongsTo
     {
         return $this->belongsTo(Event::class, 'event_id');
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (self $bet) {
+            $bet->user_id ??= Auth::id();
+        });
     }
 }
