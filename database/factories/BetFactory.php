@@ -6,6 +6,7 @@ use App\Enums\Outcome;
 use App\Enums\SpreadBet;
 use App\Enums\SpreadBetResult;
 use App\Models\Bet;
+use App\Models\Event;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
