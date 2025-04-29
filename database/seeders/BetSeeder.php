@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Bet;
+use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
@@ -21,8 +22,10 @@ class BetSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->users->each(function ($user) {
-            Bet::factory(10)->recycle($user)->create();
+        $teams = Team::all();
+
+        $this->users->each(function ($user) use ($teams) {
+            Bet::factory(10)->recycle($user)->recycle($teams)->create();
         });
     }
 }
