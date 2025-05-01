@@ -54,9 +54,17 @@ class User extends Authenticatable
      * Relationships
      * ----------------------------------------------------
      */
-    public function groups(): HasMany
+    /**
+     * Groups this user belongs to.
+     */
+    public function groups(): BelongsToMany
     {
-        return $this->hasMany(Group::class, 'leader_id');
+        return $this->belongsToMany(
+            Group::class,
+            'group_users',
+            'user_id',
+            'group_id'
+        );
     }
 
     public function bets(): HasMany
