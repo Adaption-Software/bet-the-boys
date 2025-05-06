@@ -12,6 +12,22 @@ class TeamSeeder extends Seeder
      */
     public function run(): void
     {
-        Team::factory(10)->create();
+        $csvFile = fopen(base_path('database/data/nfl_teams.csv'), 'r');
+
+        while (($data = fgetcsv($csvFile, 2000, ',')) !== false) {
+            $fullName = $data[0];
+
+            Team::create([
+                'team_name' => $fullName,
+                'short_name' => static::abbreviate($fullName),
+            ]);
+        }
+    }
+
+    public static function abbreviate(string $fullName): string
+    {
+        preg_match_all('/[A-Z]/', ucwords($fullName), $matches);
+
+        return implode('', $matches[0]);
     }
 }
