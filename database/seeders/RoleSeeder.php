@@ -31,6 +31,6 @@ class RoleSeeder extends Seeder
 
         $user = User::where('email', 'admin@example.com')->first();
 
-        $user->assignRole($adminRole);
+        $user->assignRole([$adminRole, $groupLeader, $groupMember]);
     }
 }
