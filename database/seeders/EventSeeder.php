@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Event;
+use App\Models\Team;
 use Illuminate\Database\Seeder;
 
 class EventSeeder extends Seeder
@@ -12,6 +13,8 @@ class EventSeeder extends Seeder
      */
     public function run(): void
     {
-        Event::factory(10)->create();
+        $teams = Team::all();
+
+        Event::factory(10)->recycle($teams)->create();
     }
 }
