@@ -6,6 +6,7 @@ use Database\Factories\GroupFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Group extends Model
 {
@@ -39,5 +40,18 @@ class Group extends Model
     public function leader(): BelongsTo
     {
         return $this->belongsTo(User::class, 'leader_id');
+    }
+
+    /**
+     * All users who belong to this group.
+     */
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            User::class,
+            'group_users',
+            'group_id',
+            'user_id'
+        );
     }
 }
