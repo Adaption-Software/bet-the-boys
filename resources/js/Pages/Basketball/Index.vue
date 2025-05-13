@@ -1,10 +1,17 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import BetCard from '@/Components/BetCard.vue';
+import BetCard from '@/Components/Bet/BetCard.vue';
+import { onMounted } from 'vue';
+import { useBets } from '@/scripts/stores/bets.js';
+import { storeToRefs } from 'pinia';
 
-//axios call for data from API controller
-//build card component
+const store = useBets();
+const { allBets } = storeToRefs(useBets());
+
+onMounted(() => {
+    store.getBets('basketball');
+});
 </script>
 
 <template>
@@ -18,29 +25,13 @@ import BetCard from '@/Components/BetCard.vue';
         </template>
 
         <div class="py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-2 gap-8 p-4 md:w-full">
+            <div class="grid sm:grid-cols-2 gap-8 p-4 md:w-full">
                 <BetCard
-                    icon="images/nba-logo.png"
-                    title="NFL Premier League"
-                    event-date="3 Mar 2025"
-                    event-time="8:00 pm"
-                    team1="TEAM 1"
-                    odds1="+200"
-                    team2="TEAM 2"
-                    odds2="-200"
-                    @choose-winner="onChooseWinner"
-                />
-
-                <BetCard
-                    icon="images/nfl-logo.png"
-                    title="NFL Premier League"
-                    event-date="3 Mar 2025"
-                    event-time="8:00 pm"
-                    team1="TEAM 3"
-                    odds1="+150"
-                    team2="TEAM 4"
-                    odds2="-150"
-                    @choose-winner="onChooseWinner"
+                    v-for="(bet, key) in allBets"
+                    :key="key"
+                    :event="key"
+                    icon="/images/nba-logo.png"
+                    v-bind="bet"
                 />
             </div>
         </div>
