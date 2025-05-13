@@ -5,7 +5,7 @@ import StatCard from '@/Components/Stat/StatCard.vue';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 
-defineProps({
+const props = defineProps({
     bets: {
         type: Object,
         default: () => null,
@@ -26,7 +26,7 @@ defineProps({
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Bet The Boys" />
 
     <AuthenticatedLayout>
         <template #header>
@@ -39,7 +39,9 @@ defineProps({
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div v-if="bets" class="space-y-6">
                     <div class="space-y-4">
-                        <p class="text-xl">Stats (MTD)</p>
+                        <p class="text-xl">
+                            Stats (Last Month)
+                        </p>
 
                         <div
                             class="overflow-hidden shadow-sm sm:rounded-lg bg-secondary-500 grid grid-cols-3 p-3 gap-3"
@@ -53,7 +55,9 @@ defineProps({
                     </div>
 
                     <div class="space-y-3">
-                        <p class="text-xl">Bets Placed (MTD)</p>
+                        <p class="text-xl">
+                            Bets Placed (Last Month)
+                        </p>
 
                         <div class="bg-secondary-500 mt-6 p-3 rounded">
                             <DataTable
@@ -61,11 +65,11 @@ defineProps({
                                 class="bets-datatable bg-primary-500 text-gray-200 rounded p-3"
                             >
                                 <Column
-                                    field="over_under"
+                                    field="spread_bet"
                                     header="Over/Under"
                                 />
                                 <Column field="outcome" header="Outcome" />
-                                <Column field="created_at" header="Created" />
+                                <Column field="bet_placed_at" header="Created" />
                             </DataTable>
                         </div>
                     </div>

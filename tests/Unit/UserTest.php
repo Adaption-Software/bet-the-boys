@@ -6,9 +6,7 @@ use App\Models\Group;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use JetBrains\PhpStorm\NoReturn;
 use PHPUnit\Framework\Attributes\Test;
-use Random\RandomException;
 use Tests\TestCase;
 
 class UserTest extends TestCase
@@ -25,7 +23,6 @@ class UserTest extends TestCase
             ->recycle($user)
             ->hasAttached($user)
             ->create();
-
 
         $this->assertCount($count, $user->groups);
         $this->assertInstanceOf(Collection::class, $user->groups);

@@ -14,12 +14,20 @@ class DashboardController extends Controller
     {
         $bets = Bet::query()
             ->where('user_id', Auth::id())
-            ->whereBetween('created_at', [Carbon::now()->subWeeks(4), Carbon::now()])
-            ->get();
+            ->whereBetween('created_at', [Carbon::now()->subMonth(), Carbon::now()])
+            ->get()
+            ->map(function (Bet $bet) {
+                return [
+                    'bet_placed_at' => $bet->created_at->format('m/d/Y g:ia'),
+                    'outcome' => $bet->outcome->label(),
+                    'spread_bet' => $bet->spread_bet->label(),
+                    'active_bets' => $bet->spread_bet_result->value,
+                ];
+            });
 
-        $wins = $bets->where('outcome', 'win')->count();
-        $losses = $bets->where('outcome', 'lose')->count();
-        $placed = $bets->whereNull('outcome')->count();
+        $wins = $bets->where('outcome', 'Win')->count();
+        $losses = $bets->where('outcome', 'Lose')->count();
+        $placed = $bets->whereNull('active_bets')->count();
 
         return Inertia::render('Dashboard')
             ->with('bets', $bets)
