@@ -2,11 +2,21 @@
 
 namespace App\Http\Integrations\Odds\Requests;
 
+use App\Enums\Sport;
+use App\Models\Team;
+use Illuminate\Support\Collection;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
 
 abstract class BaseOddsRequest extends Request
 {
+    protected Collection $teams;
+
+    public function __construct(Sport $sport)
+    {
+        $this->teams = Team::query()->where('sport', $sport)->get()->pluck('id', 'team_name');
+    }
+
     public function createDtoFromResponse(Response $response): mixed
     {
         return $response->collect()
@@ -26,18 +36,22 @@ abstract class BaseOddsRequest extends Request
                     'start_time' => $game['commence_time'],
                     'sport_key' => $game['sport_key'],
                     'sport_title' => $game['sport_title'],
-                    'away_team' => [
-                        'name' => $game['away_team'],
-                        'spread' => data_get($odds, "spreads.{$game['away_team']}"),
-                        'h2h' => data_get($odds, "h2h.{$game['away_team']}"),
-                    ],
-                    'home_team' => [
-                        'name' => $game['home_team'],
-                        'spread' => data_get($odds, "spreads.{$game['home_team']}"),
-                        'h2h' => data_get($odds, "h2h.{$game['home_team']}"),
-                    ],
+                    'away_team' => $this->team('away_team', $game, $odds),
+                    'home_team' => $this->team('home_team', $game, $odds),
                     'over_under' => data_get($odds, 'totals'),
                 ];
             });
+    }
+
+    protected function team(string $location, array $game, array $odds): array
+    {
+        $name = data_get($game, $location);
+
+        return [
+            'name' => $name,
+            'id' => $this->teams->get($name),
+            'spread' => data_get($odds, "spreads.{$name}"),
+            'h2h' => data_get($odds, "h2h.{$name}"),
+        ];
     }
 }

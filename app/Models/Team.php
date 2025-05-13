@@ -2,21 +2,26 @@
 
 namespace App\Models;
 
+use App\Enums\Sport;
 use Database\Factories\TeamFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Team extends Model
 {
     /** @use HasFactory<TeamFactory> */
     use HasFactory;
 
+    use SoftDeletes;
+
     protected $fillable = [
         'team_name',
         'short_name',
+        'sport',
     ];
 
     protected $casts = [
-        'deleted_at' => 'datetime',
+        'sport' => Sport::class,
     ];
 }
