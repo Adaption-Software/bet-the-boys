@@ -4,7 +4,7 @@ import { defineProps } from 'vue';
 defineProps({
     team: {
         type: Object,
-        default: null,
+        default: () => null,
     },
 });
 </script>

@@ -5,11 +5,11 @@ import TeamBet from '@/Components/Bet/TeamBet.vue';
 defineProps({
     home: {
         type: Object,
-        default: null,
+        default: () => null,
     },
     away: {
         type: Object,
-        default: null,
+        default: () => null,
     },
 });
 </script>

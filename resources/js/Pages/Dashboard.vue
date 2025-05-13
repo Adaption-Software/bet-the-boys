@@ -8,19 +8,19 @@ import Column from 'primevue/column';
 defineProps({
     bets: {
         type: Object,
-        default: null,
+        default: () => null,
     },
     wins: {
         type: Number,
-        default: null,
+        default: () => null,
     },
     losses: {
         type: Number,
-        default: null,
+        default: () => null,
     },
     placed: {
         type: Number,
-        default: null,
+        default: () => null,
     },
 });
 </script>

@@ -22,11 +22,11 @@ const props = defineProps({
     },
     home_team: {
         type: Object,
-        default: null,
+        default: () => null,
     },
     away_team: {
         type: Object,
-        default: null,
+        default: () => null,
     },
     event: {
         type: String,
