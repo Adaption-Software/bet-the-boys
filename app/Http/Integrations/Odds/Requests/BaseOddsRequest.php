@@ -14,7 +14,7 @@ abstract class BaseOddsRequest extends Request
 
     public function __construct(Sport $sport)
     {
-        $this->teams = Team::query()->where('sport', $sport)->get()->pluck('id', 'team_name');
+        $this->teams = Team::query()->where('sport', $sport)->pluck('id', 'team_name');
     }
 
     public function createDtoFromResponse(Response $response): mixed

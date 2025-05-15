@@ -20,7 +20,6 @@ const props = defineProps({
     },
 });
 
-console.log(props.bets);
 </script>
 
 <template>
