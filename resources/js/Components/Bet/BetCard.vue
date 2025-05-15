@@ -1,9 +1,9 @@
 <script setup>
-import { computed, defineProps } from 'vue';
-import Versus from '@/Components/Bet/Versus.vue';
+import { computed, defineProps, shallowRef } from 'vue';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { useBets } from '@/scripts/stores/bets.js';
+import TeamBet from '@/Components/Bet/TeamBet.vue';
 
 dayjs.extend(utc);
 
@@ -34,7 +34,13 @@ const props = defineProps({
     },
 });
 
+const winningTeam = shallowRef(null);
+
 const store = useBets();
+
+const handleWinningTeamSelect = (team) => {
+    winningTeam.value = team;
+};
 
 const eventDate = computed(() => {
     const date = dayjs(props.start_time);
@@ -70,11 +76,29 @@ const eventDate = computed(() => {
         </div>
 
         <div class="bg-secondary-500 p-4 h-full">
-            <Versus :home="home_team" :away="away_team" />
+            <div
+                class="grid grid-cols-1 place-items-center md:grid-cols-5 items-center md:flex-row md:items-center md:justify-center gap-4 mb-4"
+            >
+                <TeamBet
+                    :team="home_team"
+                    @selected-winning-team="handleWinningTeamSelect"
+                />
+
+                <span
+                    class="text-yellow-500 font-semibold border rounded-full p-2 size-10 justify-self-center"
+                >
+                    VS
+                </span>
+
+                <TeamBet
+                    :team="away_team"
+                    @selected-winning-team="handleWinningTeamSelect"
+                />
+            </div>
 
             <button
                 class="bg-transparent border border-gray-600 hover:bg-gray-700 text-white text-sm font-semibold py-2 px-4 rounded-md w-full disabled:opacity-50 disabled:cursor-not-allowed"
-                @click="store.placeBet(event)"
+                @click="store.placeBet(event, winningTeam)"
             >
                 Confirm Choice
             </button>

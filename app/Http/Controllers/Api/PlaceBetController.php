@@ -10,6 +10,9 @@ class PlaceBetController extends Controller
 {
     public function __invoke(Request $request)
     {
-        //        Bet::create(['event_id' => $request->get('eventId')]);
+        Bet::create([
+            'event_id' => $request->get('event_id'),
+            'winning_team_id' => $request->get('winning_team_id'),
+        ]);
     }
 }

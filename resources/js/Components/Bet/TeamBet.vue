@@ -1,6 +1,8 @@
 <script setup>
 import { defineProps } from 'vue';
 
+const emits = defineEmits(['selectedWinningTeam']);
+
 defineProps({
     team: {
         type: Object,
@@ -15,15 +17,17 @@ defineProps({
     >
         <span class="font-semibold text-base text-center">{{ team.name }}</span>
 
-        <span
+        <button
+            type="button"
             class="font-medium"
             :class="
-                parseFloat(team.spread.price) >= 0
+                parseFloat(team.spread?.price) >= 0
                     ? 'text-green-500'
                     : 'text-red-500'
             "
+            @click="emits('selectedWinningTeam', team.id)"
         >
-            {{ team.spread.price }}
-        </span>
+            {{ team.spread?.price }}
+        </button>
     </div>
 </template>
