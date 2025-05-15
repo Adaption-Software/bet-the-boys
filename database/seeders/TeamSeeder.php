@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Sport;
 use App\Models\Team;
 use Illuminate\Database\Seeder;
 
@@ -20,6 +21,7 @@ class TeamSeeder extends Seeder
             Team::create([
                 'team_name' => $fullName,
                 'short_name' => static::abbreviate($fullName),
+                'sport' => Sport::Football,
             ]);
         }
     }

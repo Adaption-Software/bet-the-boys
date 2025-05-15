@@ -18,7 +18,7 @@ class OddsController extends Controller
     {
         try {
             return app(OddsConnector::class)
-                ->send(new ($sport->request()))
+                ->send(new ($sport->request())($sport))
                 ->dto();
         } catch (FatalRequestException|RequestException $e) {
             abort(500, 'There was a problem with the request to the odds API.');

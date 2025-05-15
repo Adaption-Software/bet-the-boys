@@ -3,9 +3,8 @@
 namespace App\Http\Integrations\Odds\Requests;
 
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
 
-class FootballRequest extends Request
+class FootballRequest extends BaseOddsRequest
 {
     /**
      * The HTTP method of the request
@@ -17,6 +16,6 @@ class FootballRequest extends Request
      */
     public function resolveEndpoint(): string
     {
-        return '/american_football/odds';
+        return '/americanfootball_nfl/odds';
     }
 }
