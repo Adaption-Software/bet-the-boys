@@ -23,6 +23,7 @@ export default [
             globals: {
                 ...globals.browser,
                 route: true,
+                axios: true,
             },
         },
     },

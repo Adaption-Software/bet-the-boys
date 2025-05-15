@@ -27,7 +27,7 @@ const visible = ref(true);
                             </button>
                         </div>
 
-                        <hr class="border border-gray-500" />
+                        <hr class="border border-gray-500">
 
                         <div class="flex flex-col gap-y-4 overflow-y-auto">
                             <NavLink

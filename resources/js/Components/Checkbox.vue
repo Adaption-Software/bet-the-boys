@@ -9,7 +9,7 @@ const props = defineProps({
         required: true,
     },
     value: {
-        default: null,
+        default: () => null,
     },
 });
 
@@ -30,5 +30,5 @@ const proxyChecked = computed({
         type="checkbox"
         :value="value"
         class="rounded text-tertiary-600 shadow-sm border-gray-700 bg-secondary-500 focus:ring-tertiary-500 focus:ring-offset-tertiary-500"
-    />
+    >
 </template>
