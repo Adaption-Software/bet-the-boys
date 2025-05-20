@@ -1,7 +1,8 @@
 <script setup>
 defineProps({
     value: {
-        type: String,
+        type: [String, null],
+        default: () => null,
     },
 });
 </script>

@@ -8,7 +8,8 @@ import { Head, useForm } from '@inertiajs/vue3';
 
 defineProps({
     status: {
-        type: String,
+        type: [String, null],
+        default: () => null,
     },
 });
 
