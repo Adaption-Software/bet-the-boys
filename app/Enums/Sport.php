@@ -11,6 +11,14 @@ enum Sport: string
 
     case Football = 'football';
 
+    public function label(): string
+    {
+        return match ($this) {
+            self::Basketball => 'Basketball',
+            self::Football => 'Football',
+        };
+    }
+
     public function request(): string
     {
         return match ($this) {

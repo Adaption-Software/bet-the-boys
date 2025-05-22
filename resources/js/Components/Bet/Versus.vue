@@ -22,7 +22,8 @@ defineProps({
 
         <span
             class="text-yellow-500 font-semibold border rounded-full p-2 size-10 justify-self-center"
-        >VS</span>
+            >VS</span
+        >
 
         <TeamBet :team="away" />
     </div>

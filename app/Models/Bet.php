@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\BetType;
 use App\Enums\Outcome;
-use App\Enums\SpreadBet;
-use App\Enums\SpreadBetResult;
+use App\Enums\Sport;
 use Database\Factories\BetFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,11 +24,10 @@ class Bet extends Model
     protected $fillable = [
         'user_id',
         'event_id',
-        'winning_team_id',
+        'team_id',
         'outcome',
-        'spread_bet_team_id',
-        'spread_bet',
-        'spread_bet_result',
+        'bet_type',
+        'sport_type',
     ];
 
     /**
@@ -38,9 +37,9 @@ class Bet extends Model
      */
     protected $casts = [
         'deleted_at' => 'datetime',
-        'spread_bet' => SpreadBet::class,
         'outcome' => Outcome::class,
-        'spread_bet_result' => SpreadBetResult::class,
+        'bet_type' => BetType::class,
+        'sport' => Sport::class,
     ];
 
     /*
@@ -53,9 +52,9 @@ class Bet extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function event(): BelongsTo
+    public function team(): BelongsTo
     {
-        return $this->belongsTo(Event::class, 'event_id');
+        return $this->belongsTo(Team::class, 'team_id');
     }
 
     protected static function booted(): void

@@ -17,7 +17,9 @@ export default [
             ],
             'vue/multi-word-component-names': 'off',
             'vue/html-indent': ['error', 4],
-        },
+            'vue/prop-name-casing': 'off'
+
+    },
         languageOptions: {
             sourceType: 'module',
             globals: {

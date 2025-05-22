@@ -20,14 +20,14 @@ class DashboardController extends Controller
                 return [
                     'bet_placed_at' => $bet->created_at->format('m/d/Y g:ia'),
                     'outcome' => $bet->outcome->label(),
-                    'spread_bet' => $bet->spread_bet->label(),
-                    'active_bets' => $bet->spread_bet_result->value,
+                    'sport' => $bet->sport->label(),
+                    'bet_type' => $bet->bet_type->label(),
                 ];
             });
 
         $wins = $bets->where('outcome', 'Win')->count();
         $losses = $bets->where('outcome', 'Lose')->count();
-        $placed = $bets->whereNull('active_bets')->count();
+        $placed = $bets->count();
 
         return Inertia::render('Dashboard')
             ->with('bets', $bets)

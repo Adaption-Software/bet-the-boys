@@ -9,8 +9,9 @@ defineProps({
         required: true,
     },
     trend: {
-        type: [String, Number],
+        type: [String, Number, null],
         required: false,
+        default: () => null,
     },
 });
 </script>

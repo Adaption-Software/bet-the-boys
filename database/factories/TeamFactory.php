@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Sport;
 use App\Models\Team;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,6 +21,7 @@ class TeamFactory extends Factory
         return [
             'team_name' => $this->faker->words(3, true),
             'short_name' => $this->faker->randomLetter(),
+            'sport' => $this->faker->randomElement([Sport::Football, Sport::Basketball]),
         ];
     }
 }
