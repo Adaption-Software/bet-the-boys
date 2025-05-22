@@ -23,7 +23,7 @@ const toggleSidebar = () => {
 };
 
 const sidebarIcon = computed(() => {
-    return sidebarOpen.value ? 'circle-chevron-right' : 'circle-chevron-left';
+    return sidebarOpen.value ? 'circle-chevron-left' : 'circle-chevron-right';
 });
 
 const isDesktop = ref(window.innerWidth >= 768);
