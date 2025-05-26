@@ -18,6 +18,7 @@
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^3.5",
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "3.0",
         "laravel/breeze": "^2.3",
@@ -66,13 +67,18 @@
             "./vendor/bin/pint"
         ],
         "larastan": [
-            "./vendor/bin/phpstan"
+            "./vendor/bin/phpstan analyse"
         ],
         "insights": [
             "./vendor/bin/phpinsights"
         ],
         "fix": [
             "composer pint && composer larastan && composer insights"
+        ],
+        "ide-helper": [
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:meta",
+            "@php artisan ide-helper:models -M"
         ]
     },
     "extra": {
