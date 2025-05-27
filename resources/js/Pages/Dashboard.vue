@@ -31,7 +31,6 @@ defineProps({
                 Dashboard
             </h2>
         </template>
-
     </AuthenticatedLayout>
 </template>
 
