@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import UsersDataTable from '@/Components/DataTables/UsersDataTable.vue';
 
 defineProps({
     bets: {
@@ -31,6 +32,12 @@ defineProps({
                 Dashboard
             </h2>
         </template>
+        <UsersDataTable
+            :bets="bets"
+            :wins="wins"
+            :losses="losses"
+            :placed="placed"
+        ></UsersDataTable>
     </AuthenticatedLayout>
 </template>
 
