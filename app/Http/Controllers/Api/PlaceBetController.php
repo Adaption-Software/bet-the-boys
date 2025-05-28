@@ -12,7 +12,7 @@ class PlaceBetController extends Controller
     {
         Bet::create([
             'event_id' => $request->get('event_id'),
-            'winning_team_id' => $request->get('winning_team_id'),
+            'team_id' => $request->get('selected_team_id'),
         ]);
     }
 }

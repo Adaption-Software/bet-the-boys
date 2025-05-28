@@ -10,15 +10,14 @@ class Sidenav extends Navigation
             Nav::make('Home')
                 ->route('dashboard')
                 ->icon('house'),
-            //                        Nav::make('NFL')
-            //                            ->icon('football'),
-            //            Nav::make('MLB')
-            //                ->icon('baseball'),
+
+            Nav::make('NFL')
+                ->route('football.index')
+                ->icon('football'),
+
             Nav::make('NBA')
                 ->route('basketball.index')
                 ->icon('basketball'),
-            //            Nav::make('NHL')
-            //                ->icon('hockey-puck'),
         ];
     }
 }

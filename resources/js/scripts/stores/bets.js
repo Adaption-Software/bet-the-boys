@@ -16,13 +16,14 @@ export const useBets = defineStore('bets', {
                     console.error(e);
                 });
         },
-        placeBet(event_id, winning_team_id) {
-            if (!event_id || !winning_team_id) {
+        placeBet(event_id, selected_team_id) {
+            console.log(event_id, selected_team_id);
+            if (!event_id || !selected_team_id) {
                 return;
             }
 
             axios
-                .post(route('api.place-bet', { event_id, winning_team_id }))
+                .post(route('api.place-bet', { event_id, selected_team_id }))
                 .then(({ data }) => console.log(data))
                 .catch((e) => console.error(e));
         },

@@ -1,33 +1,29 @@
 <script setup>
-import { defineProps } from 'vue';
+import { computed, defineProps } from 'vue';
 
-const emits = defineEmits(['selectedWinningTeam']);
-
-defineProps({
+const props = defineProps({
     team: {
         type: Object,
         default: () => null,
     },
 });
+
+const spreadClass = computed(() => {
+    return parseFloat(props.team.spread?.price) >= 0
+        ? 'text-green-500'
+        : 'text-red-500';
+});
 </script>
 
 <template>
-    <div
-        class="md:col-span-2 justify-self-center flex flex-col items-center cursor-pointer p-2 rounded-md"
+    <button
+        type="button"
+        class="md:col-span-2 justify-self-center flex flex-col items-center cursor-pointer py-2 px-4 rounded-md bg-primary-400/30 hover:bg-primary-300/50"
     >
         <span class="font-semibold text-base text-center">{{ team.name }}</span>
 
-        <button
-            type="button"
-            class="font-medium"
-            :class="
-                parseFloat(team.spread?.price) >= 0
-                    ? 'text-green-500'
-                    : 'text-red-500'
-            "
-            @click="emits('selectedWinningTeam', team.id)"
-        >
+        <span class="font-medium" :class="[spreadClass]">
             {{ team.spread?.price }}
-        </button>
-    </div>
+        </span>
+    </button>
 </template>

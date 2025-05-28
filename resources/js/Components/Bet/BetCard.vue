@@ -34,12 +34,12 @@ const props = defineProps({
     },
 });
 
-const winningTeam = shallowRef(null);
+const selectedTeam = shallowRef(null);
 
 const store = useBets();
 
-const handleWinningTeamSelect = (team) => {
-    winningTeam.value = team;
+const handleSelected = (team) => {
+    selectedTeam.value = team;
 };
 
 const eventDate = computed(() => {
@@ -81,7 +81,11 @@ const eventDate = computed(() => {
             >
                 <TeamBet
                     :team="home_team"
-                    @selected-winning-team="handleWinningTeamSelect"
+                    :class="{
+                        'ring-tertiary-500 ring-2':
+                            home_team.id === selectedTeam,
+                    }"
+                    @click="handleSelected(home_team.id)"
                 />
 
                 <span
@@ -92,13 +96,17 @@ const eventDate = computed(() => {
 
                 <TeamBet
                     :team="away_team"
-                    @selected-winning-team="handleWinningTeamSelect"
+                    :class="{
+                        'ring-tertiary-500 ring-2':
+                            away_team.id === selectedTeam,
+                    }"
+                    @click="handleSelected(away_team.id)"
                 />
             </div>
 
             <button
                 class="bg-transparent border border-gray-600 hover:bg-gray-700 text-white text-sm font-semibold py-2 px-4 rounded-md w-full disabled:opacity-50 disabled:cursor-not-allowed"
-                @click="store.placeBet(event, winningTeam)"
+                @click="store.placeBet(event, selectedTeam)"
             >
                 Confirm Choice
             </button>
