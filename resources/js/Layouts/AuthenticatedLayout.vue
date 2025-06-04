@@ -138,7 +138,7 @@ window.addEventListener('resize', () => {
                 </div>
             </header>
 
-            <div class="h-full bg-primary-500">
+            <div class="h-full bg-primary-500 text-white pt-6">
                 <slot />
             </div>
         </main>

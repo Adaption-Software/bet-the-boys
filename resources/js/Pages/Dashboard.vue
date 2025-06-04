@@ -21,9 +21,9 @@ defineProps({
             </h2>
         </template>
 
-        <UsersDataTable
-            :bets="bets"
-        ></UsersDataTable>
+        <div class="pt-12 h-full mx-4 py-4">
+            <UsersDataTable :bets="bets" />
+        </div>
     </AuthenticatedLayout>
 </template>
 
