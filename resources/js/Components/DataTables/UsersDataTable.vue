@@ -8,18 +8,6 @@ const props = defineProps({
         type: Object,
         default: () => null,
     },
-    wins: {
-        type: Number,
-        default: () => null,
-    },
-    losses: {
-        type: Number,
-        default: () => null,
-    },
-    placed: {
-        type: Number,
-        default: () => null,
-    },
 });
 
 const flattenedBets = computed(() => {
@@ -28,14 +16,15 @@ const flattenedBets = computed(() => {
     }
     return Object.values(props.bets).flat();
 });
+console.log(flattenedBets.value)
 
 </script>
 
 <template>
     <div class="table-container p-4 md:p-6">
-        <div v-if="flattenedBets.length > 0">
+        <div v-if="flattenedBets.bets.length > 0">
             <DataTable
-                :value="flattenedBets"
+                :value="flattenedBets.bets"
                 rowGroupMode="subheader"
                 groupRowsBy="user"
                 sortMode="single"
@@ -63,17 +52,22 @@ const flattenedBets = computed(() => {
                 <template #groupfooter="slotProps">
                     <td colspan="3">
                         <div class="flex justify-end items-center py-2 px-4 text-sm md:text-base font-semibold bg-slate-500 text-white">
-                            <span>All Bets Placed: {{ props.placed }}</span>
+                            <span>All Bets Placed: {{ slotProps.data.placed }}</span>
                         </div>
                     </td>
                     <td colspan="3">
                         <div class="flex justify-end items-center py-2 px-4 text-sm md:text-base font-semibold bg-slate-500 text-white">
-                            <span>Bets Lost: {{ props.losses }}</span>
+                            <span>Bets Lost: {{ slotProps.data.lost }}</span>
                         </div>
                     </td>
                     <td colspan="3">
                         <div class="flex justify-end items-center py-2 px-4 text-sm md:text-base font-semibold bg-slate-500 text-white">
-                            <span>Bets Won: {{ props.wins }}</span>
+                            <span>Bets Won: {{ slotProps.data.win }}</span>
+                        </div>
+                    </td>
+                    <td colspan="3">
+                        <div class="flex justify-end items-center py-2 px-4 text-sm md:text-base font-semibold bg-slate-500 text-white">
+                            <span>All Bets Placed: {{ slotProps.data.pushed }}</span>
                         </div>
                     </td>
                 </template>

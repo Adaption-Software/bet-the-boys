@@ -8,18 +8,6 @@ defineProps({
         type: Object,
         default: () => null,
     },
-    wins: {
-        type: Number,
-        default: () => null,
-    },
-    losses: {
-        type: Number,
-        default: () => null,
-    },
-    placed: {
-        type: Number,
-        default: () => null,
-    },
 });
 </script>
 
@@ -35,9 +23,6 @@ defineProps({
 
         <UsersDataTable
             :bets="bets"
-            :wins="wins"
-            :losses="losses"
-            :placed="placed"
         ></UsersDataTable>
     </AuthenticatedLayout>
 </template>

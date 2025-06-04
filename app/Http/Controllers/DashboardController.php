@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Outcome;
 use App\Models\Bet;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
@@ -26,18 +27,19 @@ class DashboardController extends Controller
                     'bet_type' => $bet->bet_type->label(),
                 ];
             })
-            ->groupBy('user');
+            ->groupBy('user')
+            ->map(function (Collection $collection) {
+                return [
+                    'bets' => $collection,
+                    'win' => $collection->where('outcome', Outcome::Win->label())->count(),
+                    'lost' => $collection->where('outcome', Outcome::Lose->label())->count(),
+                    'pushed' => $collection->where('outcome', Outcome::Draw->label())->count(),
+                    'placed' => $collection->count(),
+                ];
+            });
 
-        $wins = $bets->sum(fn (Collection $bet) => $bet->where('outcome', 'Win')->count());
-
-        $losses = $bets->sum(fn (Collection $bet) => $bet->where('outcome', 'Lose')->count());
-
-        $placed = $bets->sum(fn (Collection $bet) => $bet->count());
 
         return Inertia::render('Dashboard')
-            ->with('bets', $bets)
-            ->with('wins', $wins)
-            ->with('losses', $losses)
-            ->with('placed', $placed);
+            ->with('bets', $bets);
     }
 }
