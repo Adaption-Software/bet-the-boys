@@ -19,6 +19,7 @@ class DashboardController extends Controller
             ->map(function (Bet $bet) {
                 return [
                     'user' => $bet->name,
+                    'user_id' => $bet->user_id,
                     'bet_placed_at' => $bet->created_at->format('m/d/Y g:ia'),
                     'outcome' => $bet->outcome->label(),
                     'sport' => $bet->sport->label(),

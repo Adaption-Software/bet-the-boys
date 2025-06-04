@@ -32,6 +32,7 @@ defineProps({
                 Dashboard
             </h2>
         </template>
+
         <UsersDataTable
             :bets="bets"
             :wins="wins"
