@@ -29,16 +29,6 @@ defineProps({
             striped-rows
             class="p-datatable-sm md:p-datatable-md"
         >
-            <Column field="user" header="Name" style="min-width: 12rem" :sortable="true" />
-
-            <Column field="sport" header="Sport" style="min-width: 10rem" :sortable="true" />
-
-            <Column field="bet_type" header="Bet Type" style="min-width: 10rem" :sortable="true" />
-
-            <Column field="outcome" header="Outcome" style="min-width: 10rem" :sortable="true" />
-
-            <Column field="bet_placed_at" header="Bet Placed At" style="min-width: 12rem" :sortable="true" />
-
             <template #groupheader="header">
                 <div
                     class="flex items-center py-3 px-4 bg-secondary-400 text-white font-semibold text-base md:text-lg"
@@ -46,6 +36,42 @@ defineProps({
                     <span>{{ header.data.user }}</span>
                 </div>
             </template>
+
+            <Column
+                field="user"
+                header="Name"
+                style="
+                min-width: 12rem"
+                :sortable="true"
+            />
+
+            <Column
+                field="sport"
+                header="Sport"
+                style="min-width: 10rem"
+                :sortable="true"
+            />
+
+            <Column
+                field="bet_type"
+                header="Bet Type"
+                style="min-width: 10rem"
+                :sortable="true"
+            />
+
+            <Column
+                field="outcome"
+                header="Outcome"
+                style="min-width: 10rem"
+                :sortable="true"
+            />
+
+            <Column
+                field="bet_placed_at"
+                header="Bet Placed At"
+                style="min-width: 12rem"
+                :sortable="true"
+            />
 
             <template #groupfooter="footer">
                 <td colspan="3">
