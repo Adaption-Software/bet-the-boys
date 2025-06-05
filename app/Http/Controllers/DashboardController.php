@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Outcome;
-use App\Models\Bet;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;

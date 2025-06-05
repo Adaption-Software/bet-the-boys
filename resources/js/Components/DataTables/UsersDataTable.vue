@@ -13,7 +13,7 @@ defineProps({
 <template>
     <div
         v-if="bets.length > 0"
-        class="mx-4 py-4 h-4/5 shadow-lg rounded-lg border border-gray-300"
+        class="w-3/4 mx-auto py-6 shadow-lg rounded-lg border border-gray-300"
     >
         <DataTable
             :value="bets"
@@ -23,89 +23,57 @@ defineProps({
             sort-field="user"
             :sort-order="1"
             scrollable
-            scroll-height="flex"
+            scroll-height="700px"
             responsive-layout="stack"
             breakpoint="768px"
             striped-rows
             class="p-datatable-sm md:p-datatable-md"
         >
-            <template #groupheader="slotProps">
+            <Column field="user" header="Name" style="min-width: 12rem" :sortable="true" />
+
+            <Column field="sport" header="Sport" style="min-width: 10rem" :sortable="true" />
+
+            <Column field="bet_type" header="Bet Type" style="min-width: 10rem" :sortable="true" />
+
+            <Column field="outcome" header="Outcome" style="min-width: 10rem" :sortable="true" />
+
+            <Column field="bet_placed_at" header="Bet Placed At" style="min-width: 12rem" :sortable="true" />
+
+            <template #groupheader="header">
                 <div
                     class="flex items-center py-3 px-4 bg-secondary-400 text-white font-semibold text-base md:text-lg"
                 >
-                    <i class="pi pi-user mr-2" />
-                    <span>{{ slotProps.data.user }}</span>
+                    <span>{{ header.data.user }}</span>
                 </div>
             </template>
 
-            <Column
-                field="user"
-                header="Name"
-                style="min-width: 12rem"
-                :sortable="true"
-            />
-
-            <Column
-                field="sport"
-                header="Sport"
-                style="min-width: 10rem"
-                :sortable="true"
-            />
-
-            <Column
-                field="bet_type"
-                header="Bet Type"
-                style="min-width: 10rem"
-                :sortable="true"
-            />
-
-            <Column
-                field="outcome"
-                header="Outcome"
-                style="min-width: 10rem"
-                :sortable="true"
-            />
-
-            <Column
-                field="bet_placed_at"
-                header="Bet Placed At"
-                style="min-width: 12rem"
-                :sortable="true"
-            />
-
-            <template #groupfooter="slotProps">
+            <template #groupfooter="footer">
                 <td colspan="3">
                     <div
-                        class="flex justify-end items-center py-2 px-4 text-sm md:text-base font-semibold bg-secondary-400 text-white"
+                        class="flex items-center py-2 px-4 text-sm md:text-base font-semibold bg-secondary-400 text-white"
                     >
-                        <span
-                            >All Bets Placed:
-                            {{ slotProps.data.placed_count }}</span
-                        >
+                        All Bets Placed: {{ footer.data.placed_count }}
                     </div>
                 </td>
                 <td colspan="3">
                     <div
-                        class="flex justify-end items-center py-2 px-4 text-sm md:text-base font-semibold bg-secondary-400 text-white"
+                        class="flex items-center py-2 px-4 text-sm md:text-base font-semibold bg-secondary-400 text-white"
                     >
-                        <span>Bets Lost: {{ slotProps.data.lost_count }}</span>
+                        Bets Lost: {{ footer.data.lost_count }}
                     </div>
                 </td>
                 <td colspan="3">
                     <div
-                        class="flex justify-end items-center py-2 px-4 text-sm md:text-base font-semibold bg-secondary-400 text-white"
+                        class="flex items-center py-2 px-4 text-sm md:text-base font-semibold bg-secondary-400 text-white"
                     >
-                        <span>Bets Won: {{ slotProps.data.won_count }}</span>
+                        Bets Won: {{ footer.data.won_count }}
                     </div>
                 </td>
                 <td colspan="3">
                     <div
-                        class="flex justify-end items-center py-2 px-4 text-sm md:text-base font-semibold bg-secondary-400 text-white"
+                        class="flex items-center py-2 px-4 text-sm md:text-base font-semibold bg-secondary-400 text-white"
                     >
-                        <span
-                            >Bets Pushed:
-                            {{ slotProps.data.pushed_count }}</span
-                        >
+                        Bets Pushed: {{ footer.data.pushed_count }}
                     </div>
                 </td>
             </template>
@@ -121,10 +89,6 @@ defineProps({
 </template>
 
 <style scoped>
-:deep(.p-datatable) {
-    font-family: 'Inter', sans-serif;
-}
-
 :deep(.p-datatable.p-datatable-sm .p-datatable-thead > tr > th) {
     padding: 0.75rem 1rem;
 }
