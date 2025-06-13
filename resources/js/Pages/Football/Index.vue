@@ -9,8 +9,15 @@ import BetCard from '@/Components/Bet/BetCard.vue';
 const store = useBets();
 const { allBets } = storeToRefs(useBets());
 
+const props = defineProps({
+    placedBets: {
+        type: Array,
+        default: []
+    }
+});
+
 onMounted(() => {
-    store.init('football');
+    store.init('football', props.placedBets);
 });
 
 onUnmounted(() => {

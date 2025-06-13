@@ -26,8 +26,9 @@ export const useBets = defineStore('bets', {
         dawgBet: state => state.placedBets.filter(bet => bet.bet_type === 'dawg')?.at(0),
     },
     actions: {
-        init(sport) {
+        init(sport, placedBets) {
             this.sport = sport;
+            this.placedBets = placedBets;
 
             this.getBets();
         },
