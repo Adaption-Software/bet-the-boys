@@ -33,7 +33,7 @@ onUnmounted(() => {
                 <BetCard
                     v-for="(bet, key) in allBets"
                     :key="key"
-                    :event="key"
+                    :event-id="key"
                     icon="/images/nfl-logo.png"
                     v-bind="bet"
                 />

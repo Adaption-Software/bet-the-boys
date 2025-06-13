@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { useBets } from '@/scripts/stores/bets.js';
 import TeamBet from '@/Components/Bet/TeamBet.vue';
+import BetButton from "@/Components/Bet/BetButton.vue";
 
 dayjs.extend(utc);
 
@@ -28,18 +29,18 @@ const props = defineProps({
         type: Object,
         default: () => null,
     },
-    event: {
+    eventId: {
         type: String,
         default: () => null,
     },
 });
 
-const selectedTeam = shallowRef(null);
+const selectedTeamId = shallowRef(null);
 
 const store = useBets();
 
 const handleSelected = (team) => {
-    selectedTeam.value = team;
+    selectedTeamId.value = team;
 };
 
 const eventDate = computed(() => {
@@ -83,7 +84,7 @@ const eventDate = computed(() => {
                     :team="home_team"
                     :class="{
                         'ring-tertiary-500 ring-2':
-                            home_team.id === selectedTeam,
+                            home_team.id === selectedTeamId,
                     }"
                     @click="handleSelected(home_team.id)"
                 />
@@ -98,18 +99,41 @@ const eventDate = computed(() => {
                     :team="away_team"
                     :class="{
                         'ring-tertiary-500 ring-2':
-                            away_team.id === selectedTeam,
+                            away_team.id === selectedTeamId,
                     }"
                     @click="handleSelected(away_team.id)"
                 />
             </div>
 
-            <button
-                class="bg-transparent border border-gray-600 hover:bg-gray-700 text-white text-sm font-semibold py-2 px-4 rounded-md w-full disabled:opacity-50 disabled:cursor-not-allowed"
-                @click="store.placeBet(event, selectedTeam)"
-            >
-                Confirm Choice
-            </button>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <BetButton
+                    label="Under"
+                    bet-type="under"
+                    :selected-team-id="selectedTeamId"
+                    :event-id="eventId"
+                ></BetButton>
+
+                <BetButton
+                    label="Over"
+                    bet-type="over"
+                    :selected-team-id="selectedTeamId"
+                    :event-id="eventId"
+                ></BetButton>
+
+                <BetButton
+                    label="Favorite"
+                    bet-type="favorite"
+                    :selected-team-id="selectedTeamId"
+                    :event-id="eventId"
+                ></BetButton>
+
+                <BetButton
+                    label="Dawg"
+                    bet-type="dawg"
+                    :selected-team-id="selectedTeamId"
+                    :event-id="eventId"
+                ></BetButton>
+            </div>
         </div>
     </div>
 </template>
