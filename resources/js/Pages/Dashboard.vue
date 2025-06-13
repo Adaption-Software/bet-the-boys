@@ -39,7 +39,9 @@ defineProps({
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div v-if="bets" class="space-y-6">
                     <div class="space-y-4">
-                        <p class="text-xl">Stats (Last Month)</p>
+                        <p class="text-xl">
+                            Stats (Last Month)
+                        </p>
 
                         <div
                             class="overflow-hidden shadow-sm sm:rounded-lg bg-secondary-500 grid grid-cols-3 p-3 gap-3"
@@ -53,7 +55,9 @@ defineProps({
                     </div>
 
                     <div class="space-y-3">
-                        <p class="text-xl">Bets Placed (Last Month)</p>
+                        <p class="text-xl">
+                            Bets Placed (Last Month)
+                        </p>
 
                         <div class="bg-secondary-500 mt-6 p-3 rounded">
                             <DataTable

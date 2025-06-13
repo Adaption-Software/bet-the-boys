@@ -10,12 +10,13 @@ const store = useBets();
 const { allBets } = storeToRefs(useBets());
 
 onMounted(() => {
-    store.getBets('football');
+    store.init('football');
 });
 
 onUnmounted(() => {
     store.$reset();
 });
+
 </script>
 
 <template>

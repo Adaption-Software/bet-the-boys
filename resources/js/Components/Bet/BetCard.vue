@@ -65,7 +65,7 @@ const eventDate = computed(() => {
                     :src="icon"
                     :alt="`${sport_title} logo`"
                     class="size-16 aspect-square object-contain"
-                />
+                >
                 <span class="uppercase text-sm font-semibold">
                     {{ sport_title }}
                 </span>
@@ -76,64 +76,12 @@ const eventDate = computed(() => {
             </div>
         </div>
 
-        <div class="bg-secondary-500 p-4 h-full">
-            <div
-                class="grid grid-cols-1 place-items-center md:grid-cols-5 items-center md:flex-row md:items-center md:justify-center gap-4 mb-4"
-            >
-                <TeamBet
-                    :team="home_team"
-                    :class="{
-                        'ring-tertiary-500 ring-2':
-                            home_team.id === selectedTeamId,
-                    }"
-                    @click="handleSelected(home_team.id)"
-                />
+        <div
+            class="flex flex-col gap-y-4 divide-y divide-gray-500 bg-secondary-500 p-2.5 h-full"
+        >
+            <TeamBet :team="home_team" :event-id="eventId"/>
 
-                <span
-                    class="text-yellow-500 font-semibold border rounded-full p-2 size-10 justify-self-center"
-                >
-                    VS
-                </span>
-
-                <TeamBet
-                    :team="away_team"
-                    :class="{
-                        'ring-tertiary-500 ring-2':
-                            away_team.id === selectedTeamId,
-                    }"
-                    @click="handleSelected(away_team.id)"
-                />
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <BetButton
-                    label="Under"
-                    bet-type="under"
-                    :selected-team-id="selectedTeamId"
-                    :event-id="eventId"
-                ></BetButton>
-
-                <BetButton
-                    label="Over"
-                    bet-type="over"
-                    :selected-team-id="selectedTeamId"
-                    :event-id="eventId"
-                ></BetButton>
-
-                <BetButton
-                    label="Favorite"
-                    bet-type="favorite"
-                    :selected-team-id="selectedTeamId"
-                    :event-id="eventId"
-                ></BetButton>
-
-                <BetButton
-                    label="Dawg"
-                    bet-type="dawg"
-                    :selected-team-id="selectedTeamId"
-                    :event-id="eventId"
-                ></BetButton>
-            </div>
+            <TeamBet class="pt-4" :team="away_team" :event-id="eventId" />
         </div>
     </div>
 </template>

@@ -1,6 +1,7 @@
 <script setup>
 
 import {useBets} from "@/scripts/stores/bets.js";
+import {computed} from "vue";
 
 const store = useBets();
 
@@ -13,7 +14,7 @@ defineProps({
         type: String,
         required: true,
     },
-    selectedTeamId: {
+    teamId: {
         type: Number,
         default: null,
     },
@@ -27,8 +28,9 @@ defineProps({
 <template>
     <button
         class="bg-transparent border border-gray-600 hover:bg-gray-700 text-white text-sm font-semibold py-2 px-4 rounded-md w-full disabled:opacity-50 disabled:cursor-not-allowed"
-        @click="store.placeBet(eventId, selectedTeamId, betType)"
+        @click="store.placeBet(eventId, teamId, betType)"
+        :disabled="store.disableBetting"
     >
-        {{label}}
+        {{ label }}
     </button>
 </template>

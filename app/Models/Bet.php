@@ -30,7 +30,7 @@ class Bet extends Model
         'team_id',
         'outcome',
         'bet_type',
-        'sport_type',
+        'sport',
     ];
 
     /**
