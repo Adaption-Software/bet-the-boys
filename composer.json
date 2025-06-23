@@ -10,6 +10,7 @@
         "filament/filament": "3.3",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^11.31",
+        "laravel/nightwatch": "^1.7",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "saloonphp/cache-plugin": "3.0",
