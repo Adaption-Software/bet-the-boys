@@ -7,23 +7,33 @@ export const useBets = defineStore('bets', {
         placedBets: [],
     }),
     getters: {
-        disableBetting: state => state.placedBets.length >= 4,
+        disableBetting: (state) => state.placedBets.length >= 4,
 
-        hasUnder: state => state.placedBets.some(bet => bet.bet_type === 'under'),
+        hasUnder: (state) =>
+            state.placedBets.some((bet) => bet.bet_type === 'under'),
 
-        underBet: state => state.placedBets.filter(bet => bet.bet_type === 'under')?.at(0),
+        underBet: (state) =>
+            state.placedBets.filter((bet) => bet.bet_type === 'under')?.at(0),
 
-        hasOver: state => state.placedBets.some(bet => bet.bet_type === 'over'),
+        hasOver: (state) =>
+            state.placedBets.some((bet) => bet.bet_type === 'over'),
 
-        overBet: state => state.placedBets.filter(bet => bet.bet_type === 'over')?.at(0),
+        overBet: (state) =>
+            state.placedBets.filter((bet) => bet.bet_type === 'over')?.at(0),
 
-        hasFavorite: state => state.placedBets.some(bet => bet.bet_type === 'favorite'),
+        hasFavorite: (state) =>
+            state.placedBets.some((bet) => bet.bet_type === 'favorite'),
 
-        favoriteBet: state => state.placedBets.filter(bet => bet.bet_type === 'favorite')?.at(0),
+        favoriteBet: (state) =>
+            state.placedBets
+                .filter((bet) => bet.bet_type === 'favorite')
+                ?.at(0),
 
-        hasDawg: state => state.placedBets.some(bet => bet.bet_type === 'dawg'),
+        hasDawg: (state) =>
+            state.placedBets.some((bet) => bet.bet_type === 'dawg'),
 
-        dawgBet: state => state.placedBets.filter(bet => bet.bet_type === 'dawg')?.at(0),
+        dawgBet: (state) =>
+            state.placedBets.filter((bet) => bet.bet_type === 'dawg')?.at(0),
     },
     actions: {
         init(sport, placedBets) {
@@ -34,7 +44,7 @@ export const useBets = defineStore('bets', {
         },
         getBets() {
             axios
-                .get(route('api.odds', {sport: this.sport} ))
+                .get(route('api.odds', { sport: this.sport }))
                 .then(({ data }) => {
                     this.allBets = data;
                 })
@@ -47,8 +57,8 @@ export const useBets = defineStore('bets', {
                 event_id,
                 team_id,
                 bet_type,
-                sport: this.sport
-            }
+                sport: this.sport,
+            };
 
             axios
                 .post(route('api.place-bet', payload))

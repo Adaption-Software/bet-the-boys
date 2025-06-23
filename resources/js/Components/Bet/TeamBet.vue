@@ -1,7 +1,7 @@
 <script setup>
 import { computed, defineProps } from 'vue';
-import BetButton from "@/Components/Bet/BetButton.vue";
-import {useBets} from "@/scripts/stores/bets.js";
+import BetButton from '@/Components/Bet/BetButton.vue';
+import { useBets } from '@/scripts/stores/bets.js';
 
 const store = useBets();
 
@@ -12,24 +12,36 @@ const props = defineProps({
     },
     eventId: {
         type: String,
-        required: true
-    }
+        required: true,
+    },
 });
 
 const underPlaced = computed(() => {
-   return props.eventId === store.underBet?.event_id && props.team.id === Number(store.underBet?.team_id);
+    return (
+        props.eventId === store.underBet?.event_id &&
+        props.team.id === Number(store.underBet?.team_id)
+    );
 });
 
 const overPlaced = computed(() => {
-    return props.eventId === store.overBet?.event_id && props.team.id === Number(store.overBet?.team_id);
+    return (
+        props.eventId === store.overBet?.event_id &&
+        props.team.id === Number(store.overBet?.team_id)
+    );
 });
 
 const favoritePlaced = computed(() => {
-    return props.eventId === store.favoriteBet?.event_id && props.team.id === Number(store.favoriteBet?.team_id);
+    return (
+        props.eventId === store.favoriteBet?.event_id &&
+        props.team.id === Number(store.favoriteBet?.team_id)
+    );
 });
 
 const dawgPlaced = computed(() => {
-    return props.eventId === store.dawgBet?.event_id && props.team.id === Number(store.dawgBet?.team_id);
+    return (
+        props.eventId === store.dawgBet?.event_id &&
+        props.team.id === Number(store.dawgBet?.team_id)
+    );
 });
 </script>
 
@@ -41,8 +53,8 @@ const dawgPlaced = computed(() => {
 
         <div class="grid grid-cols-4 gap-1">
             <BetButton
-                :class="{'ring-1 ring-tertiary-300': underPlaced}"
-                :disabled="store.hasUnder"
+                :class="{ 'ring-1 ring-tertiary-300': underPlaced }"
+                :disabled="store.disableBetting || store.hasUnder"
                 label="Under"
                 bet-type="under"
                 :team-id="team.id"
@@ -50,8 +62,8 @@ const dawgPlaced = computed(() => {
             />
 
             <BetButton
-                :class="{'ring-1 ring-tertiary-300': overPlaced}"
-                :disabled="store.hasOver"
+                :class="{ 'ring-1 ring-tertiary-300': overPlaced }"
+                :disabled="store.disableBetting || store.hasOver"
                 label="Over"
                 bet-type="over"
                 :team-id="team.id"
@@ -59,8 +71,8 @@ const dawgPlaced = computed(() => {
             />
 
             <BetButton
-                :class="{'ring-1 ring-tertiary-300': favoritePlaced}"
-                :disabled="store.hasFavorite"
+                :class="{ 'ring-1 ring-tertiary-300': favoritePlaced }"
+                :disabled="store.disableBetting || store.hasFavorite"
                 label="Favorite"
                 bet-type="favorite"
                 :team-id="team.id"
@@ -68,8 +80,8 @@ const dawgPlaced = computed(() => {
             />
 
             <BetButton
-                :class="{'ring-1 ring-tertiary-300': dawgPlaced}"
-                :disabled="store.hasDawg"
+                :class="{ 'ring-1 ring-tertiary-300': dawgPlaced }"
+                :disabled="store.disableBetting || store.hasDawg"
                 label="Dawg"
                 bet-type="dawg"
                 :team-id="team.id"

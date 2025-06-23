@@ -1,10 +1,8 @@
 <script setup>
-import { computed, defineProps, shallowRef } from 'vue';
+import { computed, defineProps } from 'vue';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
-import { useBets } from '@/scripts/stores/bets.js';
 import TeamBet from '@/Components/Bet/TeamBet.vue';
-import BetButton from "@/Components/Bet/BetButton.vue";
 
 dayjs.extend(utc);
 
@@ -35,14 +33,6 @@ const props = defineProps({
     },
 });
 
-const selectedTeamId = shallowRef(null);
-
-const store = useBets();
-
-const handleSelected = (team) => {
-    selectedTeamId.value = team;
-};
-
 const eventDate = computed(() => {
     const date = dayjs(props.start_time);
 
@@ -65,7 +55,7 @@ const eventDate = computed(() => {
                     :src="icon"
                     :alt="`${sport_title} logo`"
                     class="size-16 aspect-square object-contain"
-                >
+                />
                 <span class="uppercase text-sm font-semibold">
                     {{ sport_title }}
                 </span>
@@ -79,7 +69,7 @@ const eventDate = computed(() => {
         <div
             class="flex flex-col gap-y-4 divide-y divide-gray-500 bg-secondary-500 p-2.5 h-full"
         >
-            <TeamBet :team="home_team" :event-id="eventId"/>
+            <TeamBet :team="home_team" :event-id="eventId" />
 
             <TeamBet class="pt-4" :team="away_team" :event-id="eventId" />
         </div>

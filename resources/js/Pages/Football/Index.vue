@@ -12,8 +12,8 @@ const { allBets } = storeToRefs(useBets());
 const props = defineProps({
     placedBets: {
         type: Array,
-        default: []
-    }
+        default: () => [],
+    },
 });
 
 onMounted(() => {
@@ -23,7 +23,6 @@ onMounted(() => {
 onUnmounted(() => {
     store.$reset();
 });
-
 </script>
 
 <template>
