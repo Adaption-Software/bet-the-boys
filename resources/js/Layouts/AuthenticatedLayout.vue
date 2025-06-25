@@ -139,7 +139,6 @@ window.addEventListener('resize', () => {
                     </div>
                 </div>
             </header>
-
             <div class="flex-1 bg-primary-500 overflow-y-auto">
                 <slot />
             </div>
