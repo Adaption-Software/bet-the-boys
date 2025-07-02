@@ -12,7 +12,7 @@ abstract class BaseOddsRequest extends Request
 {
     protected Collection $teams;
 
-    public function __construct(Sport $sport)
+    public function __construct(protected Sport $sport)
     {
         $this->teams = Team::query()->where('sport', $sport)->pluck('id', 'team_name');
     }

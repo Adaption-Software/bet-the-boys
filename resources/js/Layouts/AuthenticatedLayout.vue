@@ -33,7 +33,7 @@ window.addEventListener('resize', () => {
 </script>
 
 <template>
-    <div class="relative md:flex h-screen overflow-hidden">
+    <div class="relative md:flex h-[100dvh]">
         <!-- Sidebar -->
         <aside
             :class="[
@@ -81,7 +81,9 @@ window.addEventListener('resize', () => {
             </div>
         </aside>
 
-        <main class="flex-1 transition-all duration-300 ease-in-out">
+        <main
+            class="flex-1 transition-all duration-300 ease-in-out flex flex-col"
+        >
             <header v-if="$slots.header" class="shadow bg-secondary-500">
                 <div
                     class="flex justify-between items-center mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8"
@@ -137,8 +139,7 @@ window.addEventListener('resize', () => {
                     </div>
                 </div>
             </header>
-
-            <div class="h-full bg-primary-500 text-white pt-6">
+            <div class="flex-1 bg-primary-500 overflow-y-auto">
                 <slot />
             </div>
         </main>

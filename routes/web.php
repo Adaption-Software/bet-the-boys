@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BasketballEventsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FootballController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,8 @@ Route::middleware('auth')
     ->group(function () {
         Route::resource('basketball', BasketballEventsController::class)
             ->only('index');
+
+        Route::resource('football', FootballController::class)->only('index');
     });
 
 require __DIR__.'/auth.php';

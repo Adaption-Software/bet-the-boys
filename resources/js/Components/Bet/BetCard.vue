@@ -1,9 +1,8 @@
 <script setup>
 import { computed, defineProps } from 'vue';
-import Versus from '@/Components/Bet/Versus.vue';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
-import { useBets } from '@/scripts/stores/bets.js';
+import TeamBet from '@/Components/Bet/TeamBet.vue';
 
 dayjs.extend(utc);
 
@@ -28,13 +27,11 @@ const props = defineProps({
         type: Object,
         default: () => null,
     },
-    event: {
+    eventId: {
         type: String,
         default: () => null,
     },
 });
-
-const store = useBets();
 
 const eventDate = computed(() => {
     const date = dayjs(props.start_time);
@@ -69,15 +66,12 @@ const eventDate = computed(() => {
             </div>
         </div>
 
-        <div class="bg-secondary-500 p-4 h-full">
-            <Versus :home="home_team" :away="away_team" />
+        <div
+            class="flex flex-col gap-y-4 divide-y divide-gray-500 bg-secondary-500 p-2.5 h-full"
+        >
+            <TeamBet :team="home_team" :event-id="eventId" />
 
-            <button
-                class="bg-transparent border border-gray-600 hover:bg-gray-700 text-white text-sm font-semibold py-2 px-4 rounded-md w-full disabled:opacity-50 disabled:cursor-not-allowed"
-                @click="store.placeBet(event)"
-            >
-                Confirm Choice
-            </button>
+            <TeamBet class="pt-4" :team="away_team" :event-id="eventId" />
         </div>
     </div>
 </template>
