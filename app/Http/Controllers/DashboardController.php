@@ -41,7 +41,7 @@ class DashboardController extends Controller
                             'user' => $user->name,
                             'user_id' => $bet->user_id,
                             'bet_placed_at' => $bet->created_at->format('m/d/Y g:ia'),
-                            'outcome' => $bet->outcome->label(),
+                            'outcome' => $bet->outcome?->label() ?? 'No Outcome Yet',
                             'sport' => $bet->sport->label(),
                             'bet_type' => $bet->bet_type->label(),
                             'placed_count' => $user->placed_count,
