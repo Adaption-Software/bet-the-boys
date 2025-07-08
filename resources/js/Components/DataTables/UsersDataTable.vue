@@ -40,8 +40,7 @@ defineProps({
             <Column
                 field="user"
                 header="Name"
-                style="
-                min-width: 12rem"
+                style="min-width: 12rem"
                 :sortable="true"
             />
 

@@ -47,11 +47,22 @@ abstract class BaseOddsRequest extends Request
     {
         $name = data_get($game, $location);
 
+        $isHomeTeam = $location === 'home_team';
+
+        if ($isHomeTeam) {
+            $total = data_get($odds, 'totals.Under');
+            data_set($total, 'type', 'under');
+        } else {
+            $total = data_get($odds, 'totals.Over');
+            data_set($total, 'type', 'over');
+        }
+
         return [
             'name' => $name,
             'id' => $this->teams->get($name),
             'spread' => data_get($odds, "spreads.{$name}"),
-            'h2h' => data_get($odds, "h2h.{$name}"),
+            'moneyline' => data_get($odds, "h2h.{$name}.price"),
+            'total' => $total,
         ];
     }
 }

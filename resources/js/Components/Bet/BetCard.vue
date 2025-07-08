@@ -56,6 +56,7 @@ const eventDate = computed(() => {
                     :alt="`${sport_title} logo`"
                     class="size-16 aspect-square object-contain"
                 />
+
                 <span class="uppercase text-sm font-semibold">
                     {{ sport_title }}
                 </span>
@@ -69,9 +70,14 @@ const eventDate = computed(() => {
         <div
             class="flex flex-col gap-y-4 divide-y divide-gray-500 bg-secondary-500 p-2.5 h-full"
         >
-            <TeamBet :team="home_team" :event-id="eventId" />
+            <TeamBet
+                class="pt-4"
+                :team="away_team"
+                :event-id="eventId"
+                location="away"
+            />
 
-            <TeamBet class="pt-4" :team="away_team" :event-id="eventId" />
+            <TeamBet :team="home_team" :event-id="eventId" location="home" />
         </div>
     </div>
 </template>

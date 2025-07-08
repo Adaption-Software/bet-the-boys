@@ -14,35 +14,26 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    location: {
+        type: String,
+        required: true,
+    },
 });
 
-const underPlaced = computed(() => {
-    return (
-        props.eventId === store.underBet?.event_id &&
-        props.team.id === Number(store.underBet?.team_id)
-    );
-});
+const checkPlacedBets = (key) => {
+    return computed(() => {
+        const bet = store[key];
+        return (
+            props.eventId === bet?.event_id &&
+            props.team.id === Number(bet?.team_id)
+        );
+    });
+};
 
-const overPlaced = computed(() => {
-    return (
-        props.eventId === store.overBet?.event_id &&
-        props.team.id === Number(store.overBet?.team_id)
-    );
-});
-
-const favoritePlaced = computed(() => {
-    return (
-        props.eventId === store.favoriteBet?.event_id &&
-        props.team.id === Number(store.favoriteBet?.team_id)
-    );
-});
-
-const dawgPlaced = computed(() => {
-    return (
-        props.eventId === store.dawgBet?.event_id &&
-        props.team.id === Number(store.dawgBet?.team_id)
-    );
-});
+const overPlaced = checkPlacedBets('overBet');
+const underPlaced = checkPlacedBets('underBet');
+const favoritePlaced = checkPlacedBets('favoriteBet');
+const dawgPlaced = checkPlacedBets('dawgBet');
 </script>
 
 <template>
@@ -53,36 +44,44 @@ const dawgPlaced = computed(() => {
 
         <div class="grid grid-cols-4 gap-1">
             <BetButton
-                :class="{ 'ring-1 ring-tertiary-300': underPlaced }"
-                :disabled="store.disableBetting || store.hasUnder"
-                label="Under"
-                bet-type="under"
-                :team-id="team.id"
-                :event-id="eventId"
-            />
-
-            <BetButton
-                :class="{ 'ring-1 ring-tertiary-300': overPlaced }"
+                v-if="team.total.type === 'over'"
+                class="flex flex-col gap-1"
                 :disabled="store.disableBetting || store.hasOver"
-                label="Over"
+                :placed="overPlaced"
                 bet-type="over"
                 :team-id="team.id"
                 :event-id="eventId"
-            />
+            >
+                <span>{{ team.total.point }}</span>
+
+                <span>{{ team.total.price }}</span>
+            </BetButton>
 
             <BetButton
-                :class="{ 'ring-1 ring-tertiary-300': favoritePlaced }"
+                v-else
+                class="flex flex-col gap-1"
+                :disabled="store.disableBetting || store.hasUnder"
+                :placed="underPlaced"
+                bet-type="under"
+                :team-id="team.id"
+                :event-id="eventId"
+            >
+                <span>{{ team.total.point }}</span>
+
+                <span>{{ team.total.price }}</span>
+            </BetButton>
+
+            <BetButton
                 :disabled="store.disableBetting || store.hasFavorite"
-                label="Favorite"
+                :placed="favoritePlaced"
                 bet-type="favorite"
                 :team-id="team.id"
                 :event-id="eventId"
             />
 
             <BetButton
-                :class="{ 'ring-1 ring-tertiary-300': dawgPlaced }"
                 :disabled="store.disableBetting || store.hasDawg"
-                label="Dawg"
+                :placed="dawgPlaced"
                 bet-type="dawg"
                 :team-id="team.id"
                 :event-id="eventId"
