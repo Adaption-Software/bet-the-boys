@@ -2,8 +2,10 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\UserResource\Pages\EditUsers;
 use App\Filament\Resources\UserResource\Pages\ListUsers;
 use App\Models\User;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
@@ -15,6 +17,19 @@ class UserResource extends Resource
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    public static function form(Form $form): Form
+    {
+        return $form->columns([
+            TextColumn::make('name')
+                ->searchable()
+                ->sortable(),
+
+            TextColumn::make('email')
+                ->searchable()
+                ->sortable(),
+        ]);
+    }
 
     public static function table(Table $table): Table
     {
@@ -38,6 +53,7 @@ class UserResource extends Resource
     {
         return [
             'index' => ListUsers::route('/'),
+            'edit' => EditUsers::route('/{record}/edit'),
         ];
     }
 }
