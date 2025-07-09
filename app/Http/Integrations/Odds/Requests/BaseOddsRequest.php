@@ -2,6 +2,7 @@
 
 namespace App\Http\Integrations\Odds\Requests;
 
+use App\Enums\BetType;
 use App\Enums\Sport;
 use App\Models\Team;
 use Illuminate\Support\Collection;
@@ -38,7 +39,6 @@ abstract class BaseOddsRequest extends Request
                     'sport_title' => $game['sport_title'],
                     'away_team' => $this->team('away_team', $game, $odds),
                     'home_team' => $this->team('home_team', $game, $odds),
-                    'over_under' => data_get($odds, 'totals'),
                 ];
             });
     }
@@ -51,17 +51,24 @@ abstract class BaseOddsRequest extends Request
 
         if ($isHomeTeam) {
             $total = data_get($odds, 'totals.Under');
-            data_set($total, 'type', 'under');
+            data_set($total, 'type', BetType::Under);
         } else {
             $total = data_get($odds, 'totals.Over');
-            data_set($total, 'type', 'over');
+            data_set($total, 'type', BetType::Over);
+        }
+
+        $moneyline = data_get($odds, "h2h.{$name}");
+
+        if (data_get($moneyline, 'price', 0) > 0) {
+            data_set($moneyline, 'type', BetType::Favorite);
+        } else {
+            data_set($moneyline, 'type', BetType::Dawg);
         }
 
         return [
             'name' => $name,
             'id' => $this->teams->get($name),
-            'spread' => data_get($odds, "spreads.{$name}"),
-            'moneyline' => data_get($odds, "h2h.{$name}.price"),
+            'moneyline' => $moneyline,
             'total' => $total,
         ];
     }

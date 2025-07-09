@@ -70,14 +70,14 @@ const eventDate = computed(() => {
         <div
             class="flex flex-col gap-y-4 divide-y divide-gray-500 bg-secondary-500 p-2.5 h-full"
         >
+            <TeamBet :team="away_team" :event-id="eventId" location="away" />
+
             <TeamBet
                 class="pt-4"
-                :team="away_team"
+                :team="home_team"
                 :event-id="eventId"
-                location="away"
+                location="home"
             />
-
-            <TeamBet :team="home_team" :event-id="eventId" location="home" />
         </div>
     </div>
 </template>
