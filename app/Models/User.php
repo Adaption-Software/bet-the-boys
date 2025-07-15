@@ -71,4 +71,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Bet::class);
     }
+
+    public static function booted(): void
+    {
+
+    }
 }
