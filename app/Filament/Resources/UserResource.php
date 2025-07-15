@@ -14,7 +14,6 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
@@ -28,13 +27,6 @@ class UserResource extends Resource
             TextInput::make('name'),
 
             TextInput::make('email'),
-
-            TextInput::make('password')
-                ->password()
-                ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                ->dehydrated(fn ($state) => filled($state))
-                ->hidden(fn (string $context): bool => $context === 'edit')
-                ->required(fn (string $context): bool => $context === 'create'),
         ]);
     }
 

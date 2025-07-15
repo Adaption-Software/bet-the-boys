@@ -31,7 +31,7 @@ class DashboardController extends Controller
                 'bets as lost_count' => function ($query) {
                     $query->whereBetween('created_at', [Carbon::now()->subMonth(), Carbon::now()])
                         ->where('outcome', Outcome::Lose);
-                }
+                },
             ])
             ->get()
             ->map(function ($user) {
@@ -49,7 +49,7 @@ class DashboardController extends Controller
                             'won_count' => $user->won_count,
                             'lost_count' => $user->lost_count,
                         ];
-                    })
+                    }),
                 ];
             })
             ->flatten(1);

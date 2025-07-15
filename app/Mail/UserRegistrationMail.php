@@ -17,7 +17,7 @@ class UserRegistrationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            to: $this->email, // @phpstan-ignore-line
+            to: $this->email,
             subject: 'User Registration',
         );
     }
