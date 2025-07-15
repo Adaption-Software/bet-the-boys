@@ -38,11 +38,10 @@ onUnmounted(() => {
         <div class="py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="grid sm:grid-cols-2 gap-8 p-4 md:w-full">
                 <BetCard
-                    v-for="(bet, key) in allBets"
-                    :key="key"
-                    :event-id="key"
+                    v-for="event in allBets"
+                    :key="event.id"
                     icon="/images/nfl-logo.png"
-                    v-bind="bet"
+                    v-bind="event"
                 />
             </div>
         </div>

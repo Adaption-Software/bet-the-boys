@@ -7,6 +7,10 @@ import TeamBet from '@/Components/Bet/TeamBet.vue';
 dayjs.extend(utc);
 
 const props = defineProps({
+    id: {
+        type: [String, Number, null],
+        default: null,
+    },
     icon: {
         type: String,
         default: '',
@@ -15,9 +19,9 @@ const props = defineProps({
         type: String,
         default: '',
     },
-    start_time: {
+    commence_time: {
         type: String,
-        default: '',
+        default: null,
     },
     home_team: {
         type: Object,
@@ -27,16 +31,12 @@ const props = defineProps({
         type: Object,
         default: () => null,
     },
-    eventId: {
-        type: String,
-        default: () => null,
-    },
 });
 
 const eventDate = computed(() => {
-    const date = dayjs(props.start_time);
+    const date = dayjs(props.commence_time);
 
-    return props.start_time && date.isValid()
+    return props.commence_time && date.isValid()
         ? date.utc().format('MMM DD, YYYY')
         : null;
 });
@@ -70,12 +70,12 @@ const eventDate = computed(() => {
         <div
             class="flex flex-col gap-y-4 divide-y divide-gray-500 bg-secondary-500 p-2.5 h-full"
         >
-            <TeamBet :team="away_team" :event-id="eventId" location="away" />
+            <TeamBet :team="away_team" :event-id="id" location="away" />
 
             <TeamBet
                 class="pt-4"
                 :team="home_team"
-                :event-id="eventId"
+                :event-id="id"
                 location="home"
             />
         </div>
