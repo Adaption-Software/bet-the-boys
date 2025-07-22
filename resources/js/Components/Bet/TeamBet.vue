@@ -2,7 +2,7 @@
 import { defineProps } from 'vue';
 import BetButton from '@/Components/Bet/BetButton.vue';
 
-const props = defineProps({
+defineProps({
     team: {
         type: Object,
         default: () => null,
@@ -16,8 +16,6 @@ const props = defineProps({
         required: true,
     },
 });
-
-console.log(props.team)
 </script>
 
 <template>
