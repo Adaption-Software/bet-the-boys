@@ -1,7 +1,7 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import BetCard from '@/Components/Bet/BetCard.vue';
+import EventCard from '@/Components/Bet/EventCard.vue';
 import { onMounted } from 'vue';
 import { useBets } from '@/scripts/stores/bets.js';
 import { storeToRefs } from 'pinia';
@@ -26,7 +26,7 @@ onMounted(() => {
 
         <div class="py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="grid sm:grid-cols-2 gap-8 p-4 md:w-full">
-                <BetCard
+                <EventCard
                     v-for="(bet, key) in allBets"
                     :key="key"
                     :event="key"

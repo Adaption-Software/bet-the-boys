@@ -1,11 +1,8 @@
 <script setup>
-import { computed, defineProps } from 'vue';
+import { defineProps } from 'vue';
 import BetButton from '@/Components/Bet/BetButton.vue';
-import { useBets } from '@/scripts/stores/bets.js';
 
-const store = useBets();
-
-const props = defineProps({
+defineProps({
     team: {
         type: Object,
         default: () => null,
@@ -14,34 +11,10 @@ const props = defineProps({
         type: String,
         required: true,
     },
-});
-
-const underPlaced = computed(() => {
-    return (
-        props.eventId === store.underBet?.event_id &&
-        props.team.id === Number(store.underBet?.team_id)
-    );
-});
-
-const overPlaced = computed(() => {
-    return (
-        props.eventId === store.overBet?.event_id &&
-        props.team.id === Number(store.overBet?.team_id)
-    );
-});
-
-const favoritePlaced = computed(() => {
-    return (
-        props.eventId === store.favoriteBet?.event_id &&
-        props.team.id === Number(store.favoriteBet?.team_id)
-    );
-});
-
-const dawgPlaced = computed(() => {
-    return (
-        props.eventId === store.dawgBet?.event_id &&
-        props.team.id === Number(store.dawgBet?.team_id)
-    );
+    location: {
+        type: String,
+        required: true,
+    },
 });
 </script>
 
@@ -51,42 +24,33 @@ const dawgPlaced = computed(() => {
             {{ team.name }}
         </span>
 
-        <div class="grid grid-cols-4 gap-1">
+        <div class="grid grid-cols-2 gap-3">
             <BetButton
-                :class="{ 'ring-1 ring-tertiary-300': underPlaced }"
-                :disabled="store.disableBetting || store.hasUnder"
-                label="Under"
-                bet-type="under"
+                :bet-type="team.total.type"
                 :team-id="team.id"
                 :event-id="eventId"
-            />
+            >
+                <p>
+                    {{ team.total.type.charAt(0).toUpperCase() }}
+                    {{ team.total.point }}
+                </p>
+
+                <p>{{ team.total.price }}</p>
+            </BetButton>
 
             <BetButton
-                :class="{ 'ring-1 ring-tertiary-300': overPlaced }"
-                :disabled="store.disableBetting || store.hasOver"
-                label="Over"
-                bet-type="over"
+                :bet-type="team.moneyline.type"
                 :team-id="team.id"
                 :event-id="eventId"
-            />
+                use-label
+            >
+                <FontAwesome
+                    :icon="team.moneyline.type === 'favorite' ? 'star' : 'bone'"
+                    class="mr-2"
+                />
 
-            <BetButton
-                :class="{ 'ring-1 ring-tertiary-300': favoritePlaced }"
-                :disabled="store.disableBetting || store.hasFavorite"
-                label="Favorite"
-                bet-type="favorite"
-                :team-id="team.id"
-                :event-id="eventId"
-            />
-
-            <BetButton
-                :class="{ 'ring-1 ring-tertiary-300': dawgPlaced }"
-                :disabled="store.disableBetting || store.hasDawg"
-                label="Dawg"
-                bet-type="dawg"
-                :team-id="team.id"
-                :event-id="eventId"
-            />
+                <span>{{ team.moneyline.price }}</span>
+            </BetButton>
         </div>
     </div>
 </template>

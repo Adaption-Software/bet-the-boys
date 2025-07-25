@@ -7,9 +7,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
         class="flex min-h-screen flex-col items-center pt-6 sm:justify-center sm:pt-0 bg-primary-500"
     >
         <div>
-            <ApplicationLogo
-                class="h-20 w-20 fill-current text-primary-200"
-            />
+            <ApplicationLogo class="h-20 w-20 fill-current text-primary-200" />
         </div>
 
         <div

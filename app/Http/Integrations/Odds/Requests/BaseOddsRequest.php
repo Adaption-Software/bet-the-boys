@@ -2,9 +2,11 @@
 
 namespace App\Http\Integrations\Odds\Requests;
 
+use App\Enums\BetType;
 use App\Enums\Sport;
 use App\Models\Team;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
 
@@ -20,38 +22,50 @@ abstract class BaseOddsRequest extends Request
     public function createDtoFromResponse(Response $response): mixed
     {
         return $response->collect()
-            ->keyBy('id')
-            ->map(function ($game) {
-                $markets = collect(data_get($game, 'bookmakers.{first}.markets'));
+            ->map(function ($event) {
+                $event = collect($event);
 
-                $odds = $markets->mapWithKeys(function ($market) {
-                    $outcomes = collect($market['outcomes'])->mapWithKeys(function ($outcome) {
-                        return [$outcome['name'] => collect($outcome)->except('name')->toArray()];
-                    });
+                $home = $event->get('home_team');
+                $away = $event->get('away_team');
 
-                    return [$market['key'] => $outcomes];
-                })->toArray();
+                $markets = collect(data_get($event, 'bookmakers.{first}.markets'))
+                    ->pluck('outcomes', 'key');
+
+                $moneylines = collect($markets->get('h2h'))->pluck('price', 'name');
+
+                [$over, $under] = collect($markets->get('totals'))
+                    ->partition(fn($item) => Str::lower($item['name']) === BetType::Over->value);
 
                 return [
-                    'start_time' => $game['commence_time'],
-                    'sport_key' => $game['sport_key'],
-                    'sport_title' => $game['sport_title'],
-                    'away_team' => $this->team('away_team', $game, $odds),
-                    'home_team' => $this->team('home_team', $game, $odds),
-                    'over_under' => data_get($odds, 'totals'),
+                    'id' => $event->get('id'),
+                    'commence_time' => $event->get('commence_time'),
+                    'sport_title' => $event->get('sport_title'),
+                    'home_team' => $this->team($home, $moneylines, $under, BetType::Under),
+                    'away_team' => $this->team($away, $moneylines, $over, BetType::Over),
                 ];
             });
     }
 
-    protected function team(string $location, array $game, array $odds): array
+    protected function team($team, $moneylines, $totals, $type): array
     {
-        $name = data_get($game, $location);
+        [$current, $opposition] =  $moneylines->partition(fn($item, $key) => $key === $team);
+
+        $cast = $current->first() > $opposition->first() ? BetType::Favorite : BetType::Dawg;
+
+        $total = $totals->first();
 
         return [
-            'name' => $name,
-            'id' => $this->teams->get($name),
-            'spread' => data_get($odds, "spreads.{$name}"),
-            'h2h' => data_get($odds, "h2h.{$name}"),
+            'name' => $team,
+            'id' => $this->teams->get($team),
+            'moneyline' => [
+                'price' => $moneylines->get($team),
+                'type' => $cast,
+            ],
+            'total' => [
+                'type' => $type->value,
+                'price' => $total['price'] ?? 0,
+                'point' => $total['point'] ?? 0,
+            ],
         ];
     }
 }
