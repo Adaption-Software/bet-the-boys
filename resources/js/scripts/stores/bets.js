@@ -84,7 +84,9 @@ export const useBets = defineStore('bets', {
 
             // Automatically show the modal when the slip is full
             if (this.pendingBets.length >= 4) {
+                console.time()
                 isBetSlipModalVisible.value = true;
+                console.timeEnd()
             }
         },
 

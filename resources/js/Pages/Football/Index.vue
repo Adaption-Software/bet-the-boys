@@ -1,10 +1,12 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
-import { useBets } from '@/scripts/stores/bets.js';
+import {isBetSlipModalVisible, useBets} from '@/scripts/stores/bets.js';
 import { storeToRefs } from 'pinia';
 import { onMounted, onUnmounted } from 'vue';
 import EventCard from '@/Components/Bet/EventCard.vue';
+import Button from "primevue/button";
+import Dialog from "primevue/dialog";
 
 const store = useBets();
 const { allBets } = storeToRefs(useBets());
@@ -15,6 +17,14 @@ const props = defineProps({
         default: () => [],
     },
 });
+
+function confirmBets() {
+    store.confirmAndPlaceBets();
+}
+
+function cancelBets() {
+    store.clearBetSlip();
+}
 
 onMounted(() => {
     store.init('football', props.placedBets);
@@ -45,5 +55,30 @@ onUnmounted(() => {
                 />
             </div>
         </div>
+
+        <Dialog
+            v-model:visible="isBetSlipModalVisible"
+            modal
+            header="Confirm Your Picks"
+            :style="{ width: '50vw' }"
+            :breakpoints="{ '960px': '75vw', '641px': '100vw' }"
+            :closable="false"
+        >
+            <div class="p-fluid">
+                <p class="mb-4">Please review your 4 selections before confirming.</p>
+                <ul class="list-none p-0 m-0 space-y-2">
+                    <li v-for="bet in store.pendingBets" :key="`${bet.event_id}-${bet.bet_type}`" class="flex justify-between items-center p-2 bg-gray-800 rounded">
+                        <span class="font-bold text-white">{{ bet.team_name }}</span>
+                        <span class="text-tertiary-300 font-semibold">{{ bet.bet_type.toUpperCase() }}</span>
+                    </li>
+                </ul>
+            </div>
+
+            <template #footer>
+                <Button label="Cancel" icon="pi pi-times" @click="cancelBets" class="p-button-text" />
+
+                <Button label="Confirm Bets" icon="pi pi-check" @click="confirmBets" autofocus />
+            </template>
+        </Dialog>
     </AuthenticatedLayout>
 </template>
