@@ -65,7 +65,9 @@ onUnmounted(() => {
             :closable="false"
         >
             <div class="p-fluid">
-                <p class="mb-4">Please review your 4 selections before confirming.</p>
+                <p class="mb-4">
+                    Please review your 4 selections before confirming.
+                </p>
                 <ul class="list-none p-0 m-0 space-y-2">
                     <li v-for="bet in store.pendingBets" :key="`${bet.event_id}-${bet.bet_type}`" class="flex justify-between items-center p-2 bg-gray-800 rounded">
                         <span class="font-bold text-white">{{ bet.team_name }}</span>
@@ -75,9 +77,9 @@ onUnmounted(() => {
             </div>
 
             <template #footer>
-                <Button label="Cancel" icon="pi pi-times" @click="cancelBets" class="p-button-text" />
+                <Button label="Cancel" icon="pi pi-times" class="p-button-text" @click="cancelBets" />
 
-                <Button label="Confirm Bets" icon="pi pi-check" @click="confirmBets" autofocus />
+                <Button label="Confirm Bets" icon="pi pi-check" autofocus @click="confirmBets" />
             </template>
         </Dialog>
     </AuthenticatedLayout>

@@ -1,8 +1,6 @@
 <script setup>
-import { useBets, isBetSlipModalVisible } from '@/scripts/stores/bets.js';
+import { useBets } from '@/scripts/stores/bets.js';
 import { computed } from 'vue';
-import Button from 'primevue/button'; // Using PrimeVue button for consistency
-import Dialog from 'primevue/dialog';
 
 const store = useBets();
 

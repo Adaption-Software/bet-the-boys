@@ -16,7 +16,6 @@ export const useBets = defineStore('bets', {
 
         isBetSlipFull: (state) => state.pendingBets.length >= 4,
 
-        // Checks if a specific event/team combo is in the slip
         isBetInSlip: (state) => (eventId, teamId, betType) => {
             return state.pendingBets.some(
                 (bet) =>
@@ -30,7 +29,7 @@ export const useBets = defineStore('bets', {
         init(sport, placedBets, allOdds) {
             this.sport = sport;
             this.placedBets = placedBets || [];
-            this.allBets = allOdds; // Assuming you might fetch this initially
+            this.allBets = allOdds;
 
             this.getBets();
         },
@@ -50,7 +49,7 @@ export const useBets = defineStore('bets', {
             return this.pendingBets.some((bet) => bet.bet_type === betType);
         },
 
-        // NEW: Toggles a bet in and out of the bet slip
+        // Toggles a bet in and out of the bet slip
         toggleBetInSlip(betDetails) {
             const { event_id, team_id, bet_type } = betDetails;
             const existingIndex = this.pendingBets.findIndex(
@@ -61,10 +60,10 @@ export const useBets = defineStore('bets', {
             );
 
             if (existingIndex > -1) {
-                // Bet is already in the slip, so remove it (un-select)
+                // Bet is already in the slip, so remove it
                 this.pendingBets.splice(existingIndex, 1);
             } else {
-                // Bet is not in the slip, add it if slip isn't full
+                // Bet is not in the slip, add it if the slip isn't full
                 if (this.pendingBets.length < 4) {
                     // We need to find full bet details (like team names) from allBets
                     const event = this.allBets?.find((e) => e.id === event_id);
@@ -76,7 +75,7 @@ export const useBets = defineStore('bets', {
 
                     this.pendingBets.push({
                         ...betDetails,
-                        team_name: team?.name || 'Unknown Team',
+                        team_name: team?.name,
                         event_details: event,
                     });
                 }
@@ -84,19 +83,16 @@ export const useBets = defineStore('bets', {
 
             // Automatically show the modal when the slip is full
             if (this.pendingBets.length >= 4) {
-                console.time()
                 isBetSlipModalVisible.value = true;
-                console.timeEnd()
             }
         },
 
-        // NEW: Action to clear the entire bet slip
+        // Action to clear the entire bet slip
         clearBetSlip() {
             this.pendingBets = [];
             isBetSlipModalVisible.value = false;
         },
 
-        // UPDATED: Renamed for clarity. This is now the final confirmation step.
         async confirmAndPlaceBets() {
             // Use Promise.all to send all bet requests in parallel
             const betPromises = this.pendingBets.map((bet) => {
@@ -120,7 +116,6 @@ export const useBets = defineStore('bets', {
                 this.pendingBets = [];
                 isBetSlipModalVisible.value = false;
 
-                // You might want to show a success notification here
             } catch (e) {
                 console.error('One or more bets failed to place:', e);
             }
