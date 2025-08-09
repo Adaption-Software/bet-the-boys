@@ -34,16 +34,13 @@ const isPlaced = computed(() => {
     );
 });
 
-
 const disabled = computed(() => {
-    // Disable if it's already permanently placed
     if (isPlaced.value) return true;
 
-    // Disable if the bet slip is full and this button is not one of the selected ones
     if (store.isBetSlipFull && !isSelected.value) return true;
 
-    // Disable if a bet of the same type (e.g., 'under') is already selected, and it's not this one
-    if (store.hasPendingBetType(props.betType) && !isSelected.value) return true;
+    if (store.hasPendingBetType(props.betType) && !isSelected.value)
+        return true;
 
     return store.hasPlacedAllBets;
 });
@@ -60,7 +57,10 @@ function handleBetSelection() {
 
 <template>
     <button
-        :class="{ 'ring-2 ring-tertiary-300': isSelected, 'ring-1 ring-green-400': isPlaced }"
+        :class="{
+            'ring-2 ring-tertiary-300': isSelected,
+            'ring-1 ring-green-400': isPlaced,
+        }"
         class="bg-transparent border border-gray-600 hover:bg-gray-700 text-white text-sm font-semibold py-1 px-3 rounded-md w-full disabled:opacity-50 disabled:cursor-not-allowed min-w-20 transition-all duration-150"
         :disabled="disabled"
         @click="handleBetSelection"

@@ -55,7 +55,7 @@ const eventDate = computed(() => {
                     :src="icon"
                     :alt="`${sport_title} logo`"
                     class="size-16 aspect-square object-contain"
-                >
+                />
 
                 <span class="uppercase text-sm font-semibold">
                     {{ sport_title }}

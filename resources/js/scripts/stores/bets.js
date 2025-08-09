@@ -115,7 +115,6 @@ export const useBets = defineStore('bets', {
                 // Clear the temporary slip
                 this.pendingBets = [];
                 isBetSlipModalVisible.value = false;
-
             } catch (e) {
                 console.error('One or more bets failed to place:', e);
             }
