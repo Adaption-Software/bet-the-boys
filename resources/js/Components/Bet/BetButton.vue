@@ -17,39 +17,53 @@ const props = defineProps({
         type: String,
         default: null,
     },
-    useLabel: {
-        type: Boolean,
-        default: false,
-    },
 });
 
-const label = computed(() => {
-    return props.betType.charAt(0).toUpperCase() + props.betType.slice(1);
+// Checks if THIS specific bet has been selected in the pending slip
+const isSelected = computed(() => {
+    return store.isBetInSlip(props.eventId, props.teamId, props.betType);
 });
 
-const placed = computed(() => {
-    const key = `${props.betType}Bet`;
-    const bet = store[key];
-
-    return (
-        props.eventId === bet?.event_id && props.teamId === Number(bet?.team_id)
+// Checks if this bet has already been confirmed and placed on the server
+const isPlaced = computed(() => {
+    return store.placedBets.some(
+        (bet) =>
+            bet.event_id === props.eventId &&
+            Number(bet.team_id) === props.teamId &&
+            bet.bet_type === props.betType
     );
 });
 
 const disabled = computed(() => {
-    const key = `has${label.value}`;
-    const hasBetType = store[key];
+    if (isPlaced.value) return true;
 
-    return placed.value || store.disableBetting || hasBetType;
+    if (store.isBetSlipFull && !isSelected.value) return true;
+
+    if (store.hasPendingBetType(props.betType) && !isSelected.value)
+        return true;
+
+    return store.hasPlacedAllBets;
 });
+
+function handleBetSelection() {
+    const betDetails = {
+        event_id: props.eventId,
+        team_id: props.teamId,
+        bet_type: props.betType,
+    };
+    store.toggleBetInSlip(betDetails);
+}
 </script>
 
 <template>
     <button
-        :class="{ 'ring-1 ring-tertiary-300': placed }"
-        class="bg-transparent border border-gray-600 hover:bg-gray-700 text-white text-sm font-semibold py-1 px-3 rounded-md w-full disabled:opacity-50 disabled:cursor-not-allowed min-w-20"
+        :class="{
+            'ring-2 ring-tertiary-300': isSelected,
+            'ring-1 ring-green-400': isPlaced,
+        }"
+        class="bg-transparent border border-gray-600 hover:bg-gray-700 text-white text-sm font-semibold py-1 px-3 rounded-md w-full disabled:opacity-50 disabled:cursor-not-allowed min-w-20 transition-all duration-150"
         :disabled="disabled"
-        @click="store.placeBet(eventId, teamId, betType)"
+        @click="handleBetSelection"
     >
         <slot />
     </button>
