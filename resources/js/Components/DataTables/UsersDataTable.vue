@@ -52,6 +52,13 @@ defineProps({
             />
 
             <Column
+                field="team_name"
+                header="Team"
+                style="min-width: 10rem"
+                :sortable="true"
+            />
+
+            <Column
                 field="bet_type"
                 header="Bet Type"
                 style="min-width: 10rem"
