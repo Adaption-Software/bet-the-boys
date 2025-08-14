@@ -1,10 +1,12 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
-import { useBets } from '@/scripts/stores/bets.js';
+import { isBetSlipModalVisible, useBets } from '@/scripts/stores/bets.js';
 import { storeToRefs } from 'pinia';
 import { onMounted, onUnmounted } from 'vue';
 import EventCard from '@/Components/Bet/EventCard.vue';
+import Button from 'primevue/button';
+import Dialog from 'primevue/dialog';
 
 const store = useBets();
 const { allBets } = storeToRefs(useBets());
@@ -15,6 +17,14 @@ const props = defineProps({
         default: () => [],
     },
 });
+
+function confirmBets() {
+    store.confirmAndPlaceBets();
+}
+
+function cancelBets() {
+    store.clearBetSlip();
+}
 
 onMounted(() => {
     store.init('football', props.placedBets);
@@ -45,5 +55,65 @@ onUnmounted(() => {
                 />
             </div>
         </div>
+
+        <Dialog
+            v-model:visible="isBetSlipModalVisible"
+            modal
+            :style="{
+                width: '50vw',
+                backgroundColor: 'white',
+                border: '1px solid #e0e0e0',
+                borderRadius: '8px',
+                padding: '20px',
+            }"
+            :breakpoints="{ '960px': '75vw', '641px': '100vw' }"
+            :closable="false"
+        >
+            <template #header>
+                <div class="flex items-center justify-between">
+                    <span class="font-bold text-xl">Confirm Your Picks</span>
+                </div>
+            </template>
+
+            <div class="p-4">
+                <p class="m-0 mb-4 text-surface-600 dark:text-surface-400">
+                    Please review your 4 selections before confirming.
+                </p>
+                <ul class="list-none p-0 m-0 space-y-3">
+                    <li
+                        v-for="bet in store.pendingBets"
+                        :key="`${bet.event_id}-${bet.bet_type}`"
+                        class="flex justify-between items-center p-3 bg-surface-50 dark:bg-surface-800 border border-surface-200 dark:border-surface-700 rounded-lg"
+                    >
+                        <span
+                            class="font-bold text-surface-700 dark:text-surface-200"
+                            >{{ bet.team_name }}</span
+                        >
+                        <span
+                            class="font-semibold text-primary-500 dark:text-primary-400"
+                            >{{ bet.bet_type.toUpperCase() }}</span
+                        >
+                    </li>
+                </ul>
+            </div>
+
+            <template #footer>
+                <div class="flex justify-end gap-4">
+                    <Button
+                        class="font-bold"
+                        label="Cancel"
+                        severity="secondary"
+                        @click="cancelBets"
+                    />
+                    <Button
+                        class="font-bold"
+                        label="Confirm Bets"
+                        icon="pi pi-check"
+                        autofocus
+                        @click="confirmBets"
+                    />
+                </div>
+            </template>
+        </Dialog>
     </AuthenticatedLayout>
 </template>
