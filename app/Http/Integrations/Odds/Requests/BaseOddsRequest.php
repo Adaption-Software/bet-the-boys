@@ -34,7 +34,7 @@ abstract class BaseOddsRequest extends Request
                 $moneylines = collect($markets->get('h2h'))->pluck('price', 'name');
 
                 [$over, $under] = collect($markets->get('totals'))
-                    ->partition(fn($item) => Str::lower($item['name']) === BetType::Over->value);
+                    ->partition(fn ($item) => Str::lower($item['name']) === BetType::Over->value);
 
                 return [
                     'id' => $event->get('id'),
@@ -48,7 +48,7 @@ abstract class BaseOddsRequest extends Request
 
     protected function team($team, $moneylines, $totals, $type): array
     {
-        [$current, $opposition] =  $moneylines->partition(fn($item, $key) => $key === $team);
+        [$current, $opposition] = $moneylines->partition(fn ($item, $key) => $key === $team);
 
         $cast = $current->first() > $opposition->first() ? BetType::Favorite : BetType::Dawg;
 
