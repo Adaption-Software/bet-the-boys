@@ -15,7 +15,7 @@ class CreateUserCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'user:create --admin';
+    protected $signature = 'user:create {--admin}';
 
     /**
      * The console command description.
