@@ -15,7 +15,11 @@ class CreateUserCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'user:create {--admin}';
+    protected $signature = 'user:create
+                                {name : The full name of the user}
+                                {email : The email address of the user}
+                                {password : The password for the user}
+                                {--admin : Create the user as an administrator}';
 
     /**
      * The console command description.
@@ -31,9 +35,9 @@ class CreateUserCommand extends Command
      */
     public function handle()
     {
-        $name = $this->ask('Full Name');
-        $email = $this->ask('Email Address');
-        $password = $this->secret('Password');
+        $name = $this->argument('name');
+        $email = $this->argument('email');
+        $password = $this->argument('password');
 
         $validator = Validator::make([
             'name' => $name,
@@ -50,7 +54,6 @@ class CreateUserCommand extends Command
             foreach ($validator->errors()->all() as $error) {
                 $this->error($error);
             }
-
             return 1;
         }
 
@@ -63,11 +66,8 @@ class CreateUserCommand extends Command
             'is_admin' => $isAdmin,
         ]);
 
-        if ($isAdmin) {
-            $this->info('✅ Admin user created successfully!');
-        } else {
-            $this->info('✅ User created successfully!');
-        }
+        $userType = $isAdmin ? 'Admin user' : 'User';
+        $this->info("✅ {$userType} '{$name}' created successfully!");
 
         return 0;
     }
