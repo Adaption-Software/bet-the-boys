@@ -26,10 +26,3 @@ defineProps({
         </div>
     </AuthenticatedLayout>
 </template>
-
-<style>
-.bets-datatable .p-datatable-table {
-    border-spacing: 0 12px; /* adds vertical space between rows */
-    border-collapse: separate !important;
-}
-</style>
