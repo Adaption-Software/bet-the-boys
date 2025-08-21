@@ -45,7 +45,10 @@ onUnmounted(() => {
             </h2>
         </template>
 
-        <div class="py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div
+            v-if="allBets?.length > 0"
+            class="py-12 mx-auto max-w-7xl sm:px-6 lg:px-8"
+        >
             <div class="grid sm:grid-cols-2 gap-8 p-4 md:w-full">
                 <EventCard
                     v-for="event in allBets"
@@ -54,6 +57,13 @@ onUnmounted(() => {
                     v-bind="event"
                 />
             </div>
+        </div>
+
+        <div
+            v-else
+            class="flex flex-col space-y-3 items-center justify-center mt-12 mx-12 border border-secondary-300 py-4 rounded-md border-dashed"
+        >
+            <span class="text-gray-200 text-xl">No bets for this week</span>
         </div>
 
         <Dialog
