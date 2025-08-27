@@ -1,10 +1,7 @@
 <script setup>
 import { computed, defineProps } from 'vue';
 import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
 import TeamBet from '@/Components/Bet/TeamBet.vue';
-
-dayjs.extend(utc);
 
 const props = defineProps({
     id: {
@@ -37,7 +34,7 @@ const eventDate = computed(() => {
     const date = dayjs(props.commence_time);
 
     return props.commence_time && date.isValid()
-        ? date.utc().format('MMM DD, YYYY')
+        ? date.format('MMM DD, YYYY')
         : null;
 });
 </script>

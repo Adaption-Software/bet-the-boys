@@ -63,7 +63,7 @@ onUnmounted(() => {
             v-else
             class="flex flex-col space-y-3 items-center justify-center mt-12 mx-12 border border-secondary-300 py-4 rounded-md border-dashed"
         >
-            <span class="text-gray-200 text-xl">No bets for this week</span>
+            <span class="text-gray-200 text-xl">No events for this week</span>
         </div>
 
         <Dialog
