@@ -4,6 +4,7 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import { ref, watch, onMounted, computed } from 'vue';
 import NavLink from '@/Components/NavLink.vue';
 import { FontAwesomeIcon as FontAwesome } from '@fortawesome/vue-fontawesome';
+import { usePage } from '@inertiajs/vue3';
 
 const SIDEBAR_STATE_KEY = 'sidebar-open';
 
@@ -120,12 +121,12 @@ window.addEventListener('resize', () => {
                                 <DropdownLink :href="route('profile.edit')">
                                     Profile
                                 </DropdownLink>
-                                <DropdownLink
+                                <DropdownLink v-if="usePage().props.auth.admin"
                                     :href="
                                         route('filament.admin.pages.dashboard')
                                     "
                                 >
-                                    Filament Admin
+                                    Admin Panel
                                 </DropdownLink>
                                 <DropdownLink
                                     :href="route('logout')"
