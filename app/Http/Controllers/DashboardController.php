@@ -21,8 +21,8 @@ class DashboardController extends Controller
             ->withCount([
                 'bets as placed_count' => fn ($query) => $query->whereBetween('created_at', $dateRange),
                 'bets as pushed_count' => fn ($query) => $query->whereBetween('created_at', $dateRange)->where('outcome', Outcome::Draw),
-                'bets as won_count'    => fn ($query) => $query->whereBetween('created_at', $dateRange)->where('outcome', Outcome::Win),
-                'bets as lost_count'   => fn ($query) => $query->whereBetween('created_at', $dateRange)->where('outcome', Outcome::Lose),
+                'bets as won_count' => fn ($query) => $query->whereBetween('created_at', $dateRange)->where('outcome', Outcome::Win),
+                'bets as lost_count' => fn ($query) => $query->whereBetween('created_at', $dateRange)->where('outcome', Outcome::Lose),
             ])
             ->whereHas('bets', function ($query) use ($dateRange) {
                 $query->whereBetween('created_at', $dateRange);

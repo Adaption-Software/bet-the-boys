@@ -35,6 +35,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
                 'sidenav' => (new Sidenav)(),
+                'admin' => $request->user()?->is_admin ?? false,
             ],
         ];
     }
