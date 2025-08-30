@@ -116,7 +116,7 @@ defineProps({
         v-else
         class="p-4 text-center text-gray-500 bg-white dark:bg-secondary-700 dark:text-gray-400 rounded-lg shadow"
     >
-        No users have placed any bets yet.
+        No users have placed a bet.
     </div>
 </template>
 
