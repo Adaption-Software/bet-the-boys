@@ -83,7 +83,7 @@ window.addEventListener('resize', () => {
         </aside>
 
         <main
-            class="flex-1 transition-all duration-300 ease-in-out flex flex-col"
+            class="flex-1 transition-all duration-300 ease-in-out flex flex-col h-screen"
         >
             <header v-if="$slots.header" class="shadow bg-secondary-500">
                 <div
@@ -140,6 +140,7 @@ window.addEventListener('resize', () => {
                     </div>
                 </div>
             </header>
+
             <div class="flex-1 bg-primary-500 overflow-y-auto">
                 <slot />
             </div>

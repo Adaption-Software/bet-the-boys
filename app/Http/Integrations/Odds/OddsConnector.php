@@ -2,6 +2,7 @@
 
 namespace App\Http\Integrations\Odds;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Saloon\CachePlugin\Contracts\Cacheable;
 use Saloon\CachePlugin\Contracts\Driver;
@@ -28,12 +29,18 @@ class OddsConnector extends Connector implements Cacheable
      */
     protected function defaultQuery(): array
     {
+        $commenceTimeFrom = Carbon::now()->startOfWeek()->toIso8601ZuluString();
+
+        $commenceTimeTo = Carbon::now()->addWeek()->endOfWeek()->toIso8601ZuluString();
+
         return [
             'apiKey' => config('services.odds_api.key'),
             'regions' => 'us',
             'markets' => 'h2h,spreads,totals',
             'oddsFormat' => 'american',
             'bookmakers' => 'draftkings',
+            'commenceTimeFrom' => $commenceTimeFrom,
+            'commenceTimeTo' => $commenceTimeTo,
         ];
     }
 
