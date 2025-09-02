@@ -7,6 +7,7 @@ import { onMounted, onUnmounted } from 'vue';
 import EventCard from '@/Components/Bet/EventCard.vue';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
+import { useThrottleFn } from '@vueuse/core'
 
 const store = useBets();
 const { allBets } = storeToRefs(useBets());
@@ -18,9 +19,7 @@ const props = defineProps({
     },
 });
 
-function confirmBets() {
-    store.confirmAndPlaceBets();
-}
+const throttledConfirmBets = useThrottleFn(store.confirmAndPlaceBets, 1000);
 
 function cancelBets() {
     store.clearBetSlip();
@@ -120,7 +119,7 @@ onUnmounted(() => {
                         label="Confirm Bets"
                         icon="pi pi-check"
                         autofocus
-                        @click="confirmBets"
+                        @click="throttledConfirmBets"
                     />
                 </div>
             </template>

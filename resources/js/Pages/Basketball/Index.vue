@@ -2,15 +2,26 @@
 import { Head } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import EventCard from '@/Components/Bet/EventCard.vue';
-import { onMounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 import { useBets } from '@/scripts/stores/bets.js';
 import { storeToRefs } from 'pinia';
 
 const store = useBets();
 const { allBets } = storeToRefs(useBets());
 
+const props = defineProps({
+    placedBets: {
+        type: Array,
+        default: () => [],
+    },
+});
+
 onMounted(() => {
-    store.getBets('basketball');
+    store.init('basketball', props.placedBets);
+});
+
+onUnmounted(() => {
+    store.$reset();
 });
 </script>
 
