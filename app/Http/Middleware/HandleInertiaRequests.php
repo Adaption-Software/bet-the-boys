@@ -9,7 +9,7 @@ use Inertia\Middleware;
 class HandleInertiaRequests extends Middleware
 {
     /**
-     * The root template that is loaded on the first page visit.
+     * The root template loaded on the first page visit.
      *
      * @var string
      */

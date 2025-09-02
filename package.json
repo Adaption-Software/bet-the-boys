@@ -38,6 +38,7 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
+        "@vueuse/core": "^13.9.0",
         "dayjs": "^1.11.13"
     }
 }
