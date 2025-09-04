@@ -5,6 +5,7 @@ namespace App\Http\Integrations\TheOddsApi\Requests;
 use App\Enums\BetType;
 use App\Enums\Sport;
 use App\Models\Team;
+use Carbon\WeekDay;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -40,9 +41,9 @@ class OddsRequest extends Request implements Cacheable
 
     protected function defaultQuery(): array
     {
-        $commenceTimeFrom = Carbon::now()->startOfWeek()->toIso8601ZuluString();
+        $commenceTimeFrom = Carbon::now()->startOfWeek(WeekDay::Thursday)->toIso8601ZuluString();
 
-        $commenceTimeTo = Carbon::now()->addWeek()->endOfWeek()->toIso8601ZuluString();
+        $commenceTimeTo = Carbon::now()->endOfWeek(WeekDay::Tuesday)->toIso8601ZuluString();
 
         return [
             'regions' => 'us',
