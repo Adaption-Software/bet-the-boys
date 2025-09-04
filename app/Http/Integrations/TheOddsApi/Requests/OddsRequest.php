@@ -1,22 +1,50 @@
 <?php
 
-namespace App\Http\Integrations\Odds\Requests;
+namespace App\Http\Integrations\TheOddsApi\Requests;
 
 use App\Enums\BetType;
 use App\Enums\Sport;
 use App\Models\Team;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
+use Saloon\CachePlugin\Contracts\Cacheable;
+use Saloon\CachePlugin\Contracts\Driver;
+use Saloon\CachePlugin\Drivers\LaravelCacheDriver;
+use Saloon\CachePlugin\Traits\HasCaching;
+use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
 
-abstract class BaseOddsRequest extends Request
+class OddsRequest extends Request implements Cacheable
 {
+    use HasCaching;
+
+    protected Method $method = Method::GET;
+
     protected Collection $teams;
 
     public function __construct(protected Sport $sport)
     {
         $this->teams = Team::query()->where('sport', $sport)->pluck('id', 'team_name');
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function resolveEndpoint(): string
+    {
+        return $this->sport->endpoint().'/odds';
+    }
+
+    protected function defaultQuery(): array
+    {
+        return [
+            'regions' => 'us',
+            'markets' => 'h2h,spreads,totals',
+            'oddsFormat' => 'american',
+            'bookmakers' => 'draftkings',
+        ];
     }
 
     public function createDtoFromResponse(Response $response): mixed
@@ -67,5 +95,20 @@ abstract class BaseOddsRequest extends Request
                 'point' => $total['point'] ?? 0,
             ],
         ];
+    }
+
+    protected function cacheKey(): ?string
+    {
+        return Str::kebab($this->sport->endpoint());
+    }
+
+    public function resolveCacheDriver(): Driver
+    {
+        return new LaravelCacheDriver(Cache::store('database'));
+    }
+
+    public function cacheExpiryInSeconds(): int
+    {
+        return 60 * 30; // 30 minutes
     }
 }
