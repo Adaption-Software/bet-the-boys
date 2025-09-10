@@ -45,7 +45,7 @@ defineProps({
                 use-label
             >
                 <FontAwesome
-                    :icon="team.moneyline.type === 'favorite' ? 'bone' : 'star'"
+                    :icon="team.moneyline.type === 'favorite' ? 'star' : 'bone'"
                     class="mr-2"
                 />
 
