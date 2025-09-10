@@ -29,6 +29,7 @@ defineProps({
                 :bet-type="team.total.type"
                 :team-id="team.id"
                 :event-id="eventId"
+                :over-under="team.total.point"
             >
                 <p>
                     {{ team.total.type.charAt(0).toUpperCase() }}

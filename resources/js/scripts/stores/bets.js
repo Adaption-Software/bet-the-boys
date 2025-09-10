@@ -101,6 +101,7 @@ export const useBets = defineStore('bets', {
                     team_id: bet.team_id,
                     bet_type: bet.bet_type,
                     sport: this.sport,
+                    over_under: bet.over_under,
                 };
                 return axios.post(route('api.place-bet'), payload);
             });
