@@ -86,7 +86,7 @@ class OddsRequest extends Request implements Cacheable
     {
         [$current, $opposition] = $moneylines->partition(fn ($item, $key) => $key === $team);
 
-        $cast = $current->first() > $opposition->first() ? BetType::Favorite : BetType::Dawg;
+        $cast = $current->first() > $opposition->first() ? BetType::Dawg : BetType::Favorite;
 
         $total = $totals->first();
 
@@ -117,6 +117,6 @@ class OddsRequest extends Request implements Cacheable
 
     public function cacheExpiryInSeconds(): int
     {
-        return 60 * 30; // 30 minutes
+        return 1 * 1; // 30 minutes
     }
 }
