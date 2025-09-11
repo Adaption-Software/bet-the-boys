@@ -29,6 +29,7 @@ defineProps({
                 :bet-type="team.total.type"
                 :team-id="team.id"
                 :event-id="eventId"
+                :over-under="team.total.point"
             >
                 <p>
                     {{ team.total.type.charAt(0).toUpperCase() }}
@@ -45,7 +46,7 @@ defineProps({
                 use-label
             >
                 <FontAwesome
-                    :icon="team.moneyline.type === 'favorite' ? 'bone' : 'star'"
+                    :icon="team.moneyline.type === 'favorite' ? 'star' : 'bone'"
                     class="mr-2"
                 />
 

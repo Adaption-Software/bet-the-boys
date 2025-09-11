@@ -7,7 +7,7 @@ import { onMounted, onUnmounted } from 'vue';
 import EventCard from '@/Components/Bet/EventCard.vue';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
-import { useThrottleFn } from '@vueuse/core'
+import { useThrottleFn } from '@vueuse/core';
 
 const store = useBets();
 const { allBets } = storeToRefs(useBets());

@@ -17,6 +17,11 @@ const props = defineProps({
         type: String,
         default: null,
     },
+    overUnder: {
+        type: Number,
+        default: null,
+        required: false,
+    },
 });
 
 // Checks if THIS specific bet has been selected in the pending slip
@@ -50,6 +55,7 @@ function handleBetSelection() {
         event_id: props.eventId,
         team_id: props.teamId,
         bet_type: props.betType,
+        over_under: props.overUnder,
     };
     store.toggleBetInSlip(betDetails);
 }

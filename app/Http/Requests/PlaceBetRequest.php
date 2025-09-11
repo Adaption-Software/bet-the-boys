@@ -16,6 +16,7 @@ class PlaceBetRequest extends FormRequest
             'team_id' => ['required', 'integer', 'exists:teams,id'],
             'bet_type' => ['required', 'string', Rule::enum(BetType::class)],
             'sport' => ['required', 'string', Rule::enum(Sport::class)],
+            'over_under' => ['nullable', 'numeric'],
         ];
     }
 }

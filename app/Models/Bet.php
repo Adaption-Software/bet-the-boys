@@ -31,6 +31,7 @@ class Bet extends Model
         'outcome',
         'bet_type',
         'sport',
+        'over_under',
     ];
 
     /**
@@ -43,6 +44,7 @@ class Bet extends Model
         'outcome' => Outcome::class,
         'bet_type' => BetType::class,
         'sport' => Sport::class,
+        'over_under' => 'decimal:2',
     ];
 
     /*

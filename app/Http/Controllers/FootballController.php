@@ -17,7 +17,7 @@ class FootballController extends Controller
             ->where('sport', Sport::Football)
             ->whereBetween('created_at', [
                 Carbon::now()->startOfWeek(WeekDay::Thursday),
-                Carbon::now()->endOfWeek(WeekDay::Tuesday)
+                Carbon::now()->endOfWeek(WeekDay::Tuesday),
             ])
             ->get();
 
