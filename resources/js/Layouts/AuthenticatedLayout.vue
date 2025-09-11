@@ -121,7 +121,8 @@ window.addEventListener('resize', () => {
                                 <DropdownLink :href="route('profile.edit')">
                                     Profile
                                 </DropdownLink>
-                                <DropdownLink v-if="usePage().props.auth.admin"
+                                <DropdownLink
+                                    v-if="usePage().props.auth.admin"
                                     :href="
                                         route('filament.admin.pages.dashboard')
                                     "

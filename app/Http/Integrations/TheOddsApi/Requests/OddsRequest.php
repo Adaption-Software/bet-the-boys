@@ -41,9 +41,33 @@ class OddsRequest extends Request implements Cacheable
 
     protected function defaultQuery(): array
     {
-        $commenceTimeFrom = Carbon::now()->startOfWeek(WeekDay::Thursday)->toIso8601ZuluString();
+        $now = Carbon::now();
 
-        $commenceTimeTo = Carbon::now()->endOfWeek(WeekDay::Tuesday)->toIso8601ZuluString();
+        $isSunday = $now->copy()
+            ->tz('America/New_York')
+            ->isDayOfWeek(WeekDay::Sunday->value);
+
+        if ($isSunday) {
+            $commenceTimeFrom = $now->copy()
+                ->startOfWeek(WeekDay::Sunday)
+                ->startOfDay()
+                ->toIso8601ZuluString();
+
+            $commenceTimeTo = $now->copy()
+                ->startOfWeek(WeekDay::Sunday)
+                ->endOfDay()
+                ->toIso8601ZuluString();
+        } else {
+            $commenceTimeFrom = $now->copy()
+                ->endOfWeek(WeekDay::Sunday)
+                ->startOfDay()
+                ->toIso8601ZuluString();
+
+            $commenceTimeTo = $now->copy()
+                ->endOfWeek(WeekDay::Sunday)
+                ->endOfDay()
+                ->toIso8601ZuluString();
+        }
 
         return [
             'regions' => 'us',
@@ -51,7 +75,7 @@ class OddsRequest extends Request implements Cacheable
             'oddsFormat' => 'american',
             'bookmakers' => 'draftkings',
             'commenceTimeFrom' => $commenceTimeFrom,
-            'commenceTimeTo' => $commenceTimeTo
+            'commenceTimeTo' => $commenceTimeTo,
         ];
     }
 
