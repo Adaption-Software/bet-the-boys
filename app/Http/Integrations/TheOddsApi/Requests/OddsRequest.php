@@ -93,6 +93,12 @@ class OddsRequest extends Request implements Cacheable
 
                 $moneylines = collect($markets->get('h2h'))->pluck('price', 'name');
 
+                $spread = collect($markets->get('spreads'))->map(function ($item) {
+                    return collect($item)->only(['price', 'point']);
+                });
+
+                dump($spread);
+
                 [$over, $under] = collect($markets->get('totals'))
                     ->partition(fn ($item) => Str::lower($item['name']) === BetType::Over->value);
 
