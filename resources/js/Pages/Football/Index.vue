@@ -96,12 +96,10 @@ onUnmounted(() => {
                     >
                         <span
                             class="font-bold text-surface-700 dark:text-surface-200"
-                            >{{ bet.team_name }}</span
-                        >
+                        >{{ bet.team_name }}</span>
                         <span
                             class="font-semibold text-primary-500 dark:text-primary-400"
-                            >{{ bet.bet_type.toUpperCase() }}</span
-                        >
+                        >{{ bet.bet_type.toUpperCase() }}</span>
                     </li>
                 </ul>
             </div>
