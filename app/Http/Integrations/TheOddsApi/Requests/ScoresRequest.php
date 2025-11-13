@@ -21,7 +21,6 @@ class ScoresRequest extends Request
     public function __construct(protected Sport $sport, protected Collection $eventIds)
     {
         $this->teams = Team::query()->where('sport', $sport)->pluck('id', 'team_name');
-
     }
 
     public function resolveEndpoint(): string

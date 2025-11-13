@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bet;
-use Illuminate\Http\Request;
+use App\Enums\Sport;
+use Carbon\WeekDay;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class BasketballEventsController extends Controller
@@ -13,54 +15,16 @@ class BasketballEventsController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Basketball/Index');
+        $placedBets = Auth::user()
+            ->bets()
+            ->where('sport', Sport::Basketball)
+            ->whereBetween('created_at', [
+                Carbon::now()->startOfWeek(WeekDay::Thursday),
+                Carbon::now()->endOfWeek(WeekDay::Tuesday),
+            ])
+            ->get();
+
+        return Inertia::render('Basketball/Index')
+            ->with('placedBets', $placedBets);
     }
-    //
-    //    /**
-    //     * Show the form for creating a new resource.
-    //     */
-    //    public function create()
-    //    {
-    //        //
-    //    }
-    //
-    //    /**
-    //     * Store a newly created resource in storage.
-    //     */
-    //    public function store(Request $request)
-    //    {
-    //        //
-    //    }
-    //
-    //    /**
-    //     * Display the specified resource.
-    //     */
-    //    public function show(Bet $bet)
-    //    {
-    //        //
-    //    }
-    //
-    //    /**
-    //     * Show the form for editing the specified resource.
-    //     */
-    //    public function edit(Bet $bet)
-    //    {
-    //        //
-    //    }
-    //
-    //    /**
-    //     * Update the specified resource in storage.
-    //     */
-    //    public function update(Request $request, Bet $bet)
-    //    {
-    //        //
-    //    }
-    //
-    //    /**
-    //     * Remove the specified resource from storage.
-    //     */
-    //    public function destroy(Bet $bet)
-    //    {
-    //        //
-    //    }
 }

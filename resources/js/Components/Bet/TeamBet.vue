@@ -40,17 +40,16 @@ defineProps({
             </BetButton>
 
             <BetButton
-                :bet-type="team.moneyline.type"
+                :bet-type="team.spread.type"
                 :team-id="team.id"
                 :event-id="eventId"
                 use-label
             >
                 <FontAwesome
-                    :icon="team.moneyline.type === 'favorite' ? 'star' : 'bone'"
+                    :icon="team.spread.type === 'favorite' ? 'star' : 'bone'"
                     class="mr-2"
                 />
-
-                <span>{{ team.moneyline.price }}</span>
+                <span>{{ team.spread.point }}</span>
             </BetButton>
         </div>
     </div>
