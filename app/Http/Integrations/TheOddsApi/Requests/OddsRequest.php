@@ -43,23 +43,9 @@ class OddsRequest extends Request implements Cacheable
     {
         $now = Carbon::now();
 
-        $isSunday = $now->copy()
-            ->tz('America/New_York')
-            ->isDayOfWeek(WeekDay::Sunday->value);
-
-        if ($isSunday) {
+        if ($this->sport === Sport::Basketball) {
             $commenceTimeFrom = $now->copy()
-                ->startOfWeek(WeekDay::Sunday)
-                ->startOfDay()
-                ->toIso8601ZuluString();
-
-            $commenceTimeTo = $now->copy()
-                ->startOfWeek(WeekDay::Sunday)
-                ->endOfDay()
-                ->toIso8601ZuluString();
-        } else {
-            $commenceTimeFrom = $now->copy()
-                ->endOfWeek(WeekDay::Sunday)
+                ->startOfWeek(WeekDay::Monday)
                 ->startOfDay()
                 ->toIso8601ZuluString();
 
@@ -67,6 +53,35 @@ class OddsRequest extends Request implements Cacheable
                 ->endOfWeek(WeekDay::Sunday)
                 ->endOfDay()
                 ->toIso8601ZuluString();
+        }
+
+        else {
+            $isSunday = $now->copy()
+                ->tz('America/New_York')
+                ->isDayOfWeek(WeekDay::Sunday->value);
+
+            if ($isSunday) {
+                $commenceTimeFrom = $now->copy()
+                    ->startOfWeek(WeekDay::Sunday)
+                    ->startOfDay()
+                    ->toIso8601ZuluString();
+
+                $commenceTimeTo = $now->copy()
+                    ->startOfWeek(WeekDay::Sunday)
+                    ->endOfDay()
+                    ->toIso8601ZuluString();
+            } else {
+                // It is NOT Sunday: Get games for NEXT Sunday
+                $commenceTimeFrom = $now->copy()
+                    ->endOfWeek(WeekDay::Sunday)
+                    ->startOfDay()
+                    ->toIso8601ZuluString();
+
+                $commenceTimeTo = $now->copy()
+                    ->endOfWeek(WeekDay::Sunday)
+                    ->endOfDay()
+                    ->toIso8601ZuluString();
+            }
         }
 
         return [
